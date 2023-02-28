@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='template')
 def index():
     return redirect(url_for('login'))
 
-@app.route('/login', methods = ['GET','POST'])
+@app.route('/login', methods = ['GET','POST']) #persona o empresa
 def login():
     if request.method == 'POST':
         print(request.form['username'])
@@ -15,6 +15,12 @@ def login():
         return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
+
+@app.route('/Perfil')
+def perfil():
+    return  redirect(url_for('login'))
+
+
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
