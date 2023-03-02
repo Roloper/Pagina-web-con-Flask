@@ -1,23 +1,23 @@
 CREATE TABLE `empresa` (
-  `id_empresa` int(100) NOT NULL,
+  `id_empresa` int AUTO_INCREMENT PRIMARY KEY,
   `e_nombre` varchar(100) NOT NULL,
   `e_username` varchar(100) NOT NULL,
   `e_password` varchar(100) NOT NULL,
   `e_email` varchar(100) NOT NULL,
   `e_celular` varchar(100) NOT NULL,
   `e_ubicacion` text NOT NULL,
-  `e_activo` int(100) NOT NULL DEFAULT '0'
-  `e_rating` int(11) NOT NULL DEFAULT '0',
+  `e_activo` int(100) NOT NULL DEFAULT '0',
+  `e_rating` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
+----------------------------------------------------------
 
 --
 -- Table structure for table `farmer`
 --
 
 CREATE TABLE `agricultor` (
-  `id_agricultor` int(255) NOT NULL,
+  `id_agricultor` int AUTO_INCREMENT PRIMARY KEY,
   `a_name` varchar(255) NOT NULL,
   `a_username` varchar(255) NOT NULL,
   `a_password` varchar(255) NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE `agricultor` (
   `a_ubicacion` text NOT NULL,
   `a_activo` int(255) NOT NULL DEFAULT '0',
   `a_rating` int(11) NOT NULL DEFAULT '0',
-  `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png',
+  `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
