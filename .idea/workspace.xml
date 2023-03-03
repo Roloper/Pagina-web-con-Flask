@@ -5,14 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e78599bc-fb5f-4d5d-8f46-a7f4b30c0a0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/register.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/auth/AoE.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/auth/registerA.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/template/auth/registerE.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/ModelUser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/entities/User.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template/auth/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BD/bd.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/registerA.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/registerA.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +24,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -48,7 +50,28 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.app">
+    <configuration name="User" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Pagina-web-con-Flask" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/models/entities" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/models/entities/User.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Pagina-web-con-Flask" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -73,6 +96,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.app" />
+        <item itemvalue="Python.User" />
       </list>
     </recent_temporary>
   </component>
