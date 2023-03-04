@@ -73,6 +73,29 @@ CREATE TABLE `usuario` (
   `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- agregar estos campos a usuario
+--`reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+--`online` varchar(1) NOT NULL DEFAULT '0', 0 o 1 para marcar si el usuario esta conectado
+--
+
+-- crear tabla para los mensajes
+--DROP TABLE IF EXISTS `messages`;
+--CREATE TABLE IF NOT EXISTS `messages` (
+--  `id` int(11) NOT NULL AUTO_INCREMENT,
+--  `body` text NOT NULL,
+--  `msg_by` int(11) NOT NULL,
+--  `msg_to` int(11) NOT NULL,
+--  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+--  PRIMARY KEY (`id`)
+--) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
+--
+--
+--INSERT INTO `messages` (`id`, `body`, `msg_by`, `msg_to`, `msg_time`) VALUES
+--(178, 'hlw', 9, 12, '2018-07-23 14:13:38'),
+--(177, 'hi', 12, 9, '2018-07-23 14:13:26');
+--
+--
+
 --
 -- Índices para tablas volcadas
 --
