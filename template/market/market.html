@@ -1,0 +1,232 @@
+{% extends '/base.html' %}
+
+{% block title %}Market{% endblock %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/market.css')}}">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="col-md-12 store-items-col">
+      <h2 class="h2-responsive shadow py-3">Mercado <b>Digital</b></h2>
+       <!-- wrapper -->
+            <div class="store-items">
+              <div class="row store-row-2 py-3">
+
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+                      
+                      <div class="img-box">
+                          <img src="{{ url_for('static', filename='img/beet.png') }}" class="img-responsive img-fluid" alt="">									
+                      </div>
+                      <div class="thumb-content">
+                          <h3 class="h4-responsive">Remolacha</h3>	
+                          <p class="categoria"> <b>Categoria</b></p>
+                          <p class="descripcion"> <b>Descripcion</b></p>
+                          <p class="item-price"> <b>S/50.00</b></p>
+                          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                      </div>						
+                  </div>                      
+      </div>
+      <!-- /card 1 -->
+
+          <div class="col-sm-3">
+            <div class="thumb-wrapper">
+                
+                <div class="img-box">
+                    <img src="{{ url_for('static', filename='img/broccoli.png') }}" class="img-responsive img-fluid" alt="">									
+                </div>
+                <div class="thumb-content">
+                    <h3 class="h3-responsive">Brocoli</h3>									
+                    <p class="categoria"> <b>Categoria</b></p>
+                    <p class="descripcion"> <b>Descripcion</b></p>
+                    <p class="item-price"> <b>S/50.00</b></p>
+                    <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                </div>						
+            </div>                     
+</div>
+<!-- /card 2 -->
+
+<div class="col-sm-3">
+  <div class="thumb-wrapper">
+      
+      <div class="img-box">
+          <img src="{{ url_for('static', filename='img/cabbage_PNG8815.png') }}" class="img-responsive img-fluid" alt="">									
+      </div>
+      <div class="thumb-content">
+          <h3 class="h3-responsive">Lechuga</h3>									
+          <p class="categoria"> <b>Categoria</b></p>
+          <p class="descripcion"> <b>Descripcion</b></p>
+          <p class="item-price"> <b>S/50.00</b></p>
+          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+      </div>						
+  </div>              
+</div>
+<!-- /card3 -->
+
+<div class="col-sm-3">
+  <div class="thumb-wrapper">
+     
+      <div class="img-box">
+          <img src="{{ url_for('static', filename='img/cabbage_PNG8823.png') }}" class="img-responsive img-fluid" alt="">									
+      </div>
+      <div class="thumb-content">
+          <h3 class="h3-responsive">Coliflor</h3>									
+          <p class="categoria"> <b>Categoria</b></p>
+          <p class="descripcion"> <b>Descripcion</b></p>
+          <p class="item-price"> <b>S/50.00</b></p>
+          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+      </div>						
+  </div>            
+</div>
+<!-- /card 4-->
+              </div>
+              <!-- /store-row-2 -->
+
+              <!-- Store 3 -->
+              <div class="row store-row-3 py-3">
+
+                <div class="col-sm-3">
+                  <div class="thumb-wrapper">
+                      
+                      <div class="img-box">
+                          <img src="{{ url_for('static', filename='img/carrot_PNG4988.png') }}" class="img-responsive img-fluid" alt="">									
+                      </div>
+                      <div class="thumb-content">
+                          <h4 class="h4-responsive">Zanahoria</h4>									
+                          
+                          <p class="item-price"> <b>S/50.00</b></p>
+                          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                      </div>						
+                  </div>                      
+      </div>
+      <!-- /card 1 -->
+
+          <div class="col-sm-3">
+            <div class="thumb-wrapper">
+                
+                <div class="img-box">
+                    <img src="{{ url_for('static', filename='img/corn_PNG5286.png') }}" class="img-responsive img-fluid" alt="">									
+                </div>
+                <div class="thumb-content">
+                    <h4 class="h4-responsive">Maiz</h4>									
+                    
+                    <p class="item-price"> <b>S/50.00</b></p>
+                    <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                </div>						
+            </div>                     
+</div>
+<!-- /card 2 -->
+
+<div class="col-sm-3">
+  <div class="thumb-wrapper">
+      
+      <div class="img-box">
+          <img src="{{ url_for('static', filename='img/garlic_PNG12801.png') }}" class="img-responsive img-fluid" alt="">									
+      </div>
+      <div class="thumb-content">
+          <h4 class="h4-responsive">Ajo</h4>									
+          
+          <p class="item-price"> <b>S/50.00</b></p>
+          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+      </div>						
+  </div>              
+</div>
+<!-- /card3 -->
+
+<div class="col-sm-3">
+  <div class="thumb-wrapper">
+      
+      <div class="img-box">
+          <img src="{{ url_for('static', filename='img/ginger_PNG16800.png') }}" class="img-responsive img-fluid" alt="">									
+      </div>
+      <div class="thumb-content">
+          <h4 class="h4-responsive">Gengibre</h4>									
+          
+          <p class="item-price"> <b>S/50.00</b></p>
+          <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+      </div>						
+  </div>            
+</div>
+<!-- /card 4-->
+              </div>
+              <!-- /store-row-3 -->
+
+                <!-- Store 3 (a) -->
+                <div class="row store-row-3 py-3">
+
+                  <div class="col-sm-3">
+                    <div class="thumb-wrapper">
+                        
+                        <div class="img-box">
+                            <img src="{{ url_for('static', filename='img/mushroom_PNG3219.png') }}" class="img-responsive img-fluid" alt="">									
+                        </div>
+                        <div class="thumb-content">
+                            <h4 class="h4-responsive">Champiñon</h4>									
+                            
+                            <p class="item-price"> <b>S/50.00</b></p>
+                            <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                        </div>						
+                    </div>                      
+        </div>
+        <!-- /card 1 -->
+
+            <div class="col-sm-3">
+              <div class="thumb-wrapper">
+                  
+                  <div class="img-box">
+                      <img src="{{ url_for('static', filename='img/onion_PNG3821.png') }}" class="img-responsive img-fluid" alt="">									
+                  </div>
+                  <div class="thumb-content">
+                      <h4 class="h4-responsive">Cebolla</h4>									
+                      
+                      <p class="item-price"> <b>S/50.00</b></p>
+                      <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+                  </div>						
+              </div>                     
+  </div>
+  <!-- /card 2 -->
+
+  <div class="col-sm-3">
+    <div class="thumb-wrapper">
+        
+        <div class="img-box">
+            <img src="{{ url_for('static', filename='img/palm_tree_PNG93356.png') }}" class="img-responsive img-fluid" alt="">									
+        </div>
+        <div class="thumb-content">
+            <h4 class="h4-responsive">Palmera</h4>									
+            
+            <p class="item-price"> <b>S/50.00</b></p>
+            <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+        </div>						
+    </div>              
+  </div>
+  <!-- /card3 -->
+
+  <div class="col-sm-3">
+    <div class="thumb-wrapper">
+        
+        <div class="img-box">
+            <img src="{{ url_for('static', filename='img/wheat_PNG108.png') }}" class="img-responsive img-fluid" alt="">									
+        </div>
+        <div class="thumb-content">
+            <h4 class="h4-responsive">Trigo</h4>									
+            
+            <p class="item-price"> <b>S/50.00</b></p>
+            <a href="#" class="btn btn-primary">Agregar al Carrito</a>
+        </div>						
+    </div>            
+  </div>
+  <!-- /card 4-->
+                </div>
+                <!-- /store-row-3(a)-->
+           
+                </div>
+                <!-- /store items -->
+            </div>
+            <!-- /col-md-12-->     
+            </div>
+            <!-- /container -->
+{% endblock %}
