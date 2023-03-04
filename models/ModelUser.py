@@ -37,3 +37,18 @@ class ModelUser():
                 return None
         except Exception as ex:
             raise Exception(ex)
+
+    @classmethod
+    def register(cls, db, user):
+        try:
+            cursor = db.connection.cursor()
+            sql = """INSERT INTO usuario(a_name, a_username, a_password, a_email, a_descipcion, a_celular, a_ubicacion, a_imagenperfil) 
+                     VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
+                user.a_name, user.a_username, user.get_password_hash(user.a_password),
+                user.a_email, user.a_descipcion, user.a_celular, user.a_ubicacion, user.a_imagenperfil)
+            cursor.execute(sql)
+            db.connection.commit()
+            return True
+        except Exception as ex:
+            db.connection.rollback()
+            raise Exception(ex)

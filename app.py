@@ -23,7 +23,7 @@ def load_user(id_usuario):
 #URL PRINCIPAL
 @app.route('/')
 def index():
-    return redirect(url_for('login'))
+    return redirect(url_for('index.html'))
 
 #URL PARA EL LOGIN
 @app.route('/login', methods = ['GET','POST']) #persona o empresa
@@ -54,11 +54,29 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
-#URL DEL REGISTRO
+
+#URL DEL REGISTRO-
 @app.route('/register', methods =['GET','POST'])
 def register():
     if request.method == 'POST':
-        return render_template('auth/register.html')
+        user = User(
+            None,
+            request.form['a_name'],
+            request.form['a_username'],
+            User.hash_password(request.form['a_password']),
+            request.form['a_email'],
+            request.form['a_descripcion'],
+            request.form['a_celular'],
+            request.form['a_ubicacion'],
+            request.form['a_imagenperfil']
+        )
+
+        try:
+            ModelUser.register_user(db, user)
+            return "Registro exitoso"
+        except Exception as ex:
+            return str(ex)
+
     else:
         return render_template('auth/register.html')
 
