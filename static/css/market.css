@@ -1,0 +1,110 @@
+/* Store rows */
+ 
+.store-items-col h2 {
+    font-family: 'Raleway', sans-serif;
+    color: #4d4d4d;
+    font-size: 26px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: initial;
+    position: relative;
+    margin: 30px 0 60px;
+    }
+    .store-items-col h2::after {
+    content: "";
+    width: 80px;
+    position: absolute;
+    margin: 0 auto;
+    height: 4px;
+    border-radius: 1px;
+    background: #7ac400;
+    left: 0;
+    right: 0;
+    bottom: -20px;
+    }
+    
+    .store-items .store-row-2, .store-row-3 {
+    color: #747d89;
+    min-height: 325px;
+    text-align: center;
+    overflow: hidden;
+    }
+    .store-items .store-row-2 .thumb-wrapper, .store-row-3 .thumb-wrapper {
+    padding: 25px 15px;
+    background: #fff;
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    }
+    .store-items .store-row-2 .img-box, .store-row-3 .img-box {
+    height: 120px;
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+    }
+     .store-items .store-row-2 img, .store-row-3 img {	
+    max-width: 100%;
+    max-height: 100%;
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    }
+    .store-items .store-row-2 h4, .store-row-3  h4 {
+    font-size: 18px;
+    }
+    
+    .store-items .store-row-2 .thumb-content .btn, .store-row-3 .thumb-content .btn {
+    color: #00cc00;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #00cc00;
+    padding: 6px 14px;
+    margin-top: 5px;
+    line-height: 16px;
+    border-radius: 20px;
+    }
+    .store-items .store-row-2 .thumb-content .btn:hover, .store-row-3 .thumb-content .btn:focus {
+    color: #fff;
+    background: #00cc00;
+    box-shadow: none;
+    }
+    
+    
+    .store-items .store-row-2 .item-price, .store-row-3 .item-price {
+    font-size: 13px;
+    padding: 2px 0;
+    }
+    .store-items .store-row-2 .item-price strike, .store-row-3 .item-price strike {
+    opacity: 0.7;
+    margin-right: 5px;
+    }
+    
+    .store-items .store-row-2 .wish-icon, .store-row-3 .wish-icon {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
+    cursor: pointer;
+    font-size: 16px;
+    color: #abb0b8;
+    }
+    .store-items .store-row-2 .wish-icon .fa-heart, .store-row-3 .wish-icon .fa-heart {
+    color: #ff6161;
+    }
+    .star-rating li {
+    padding: 0;
+    }
+    .star-rating i {
+    font-size: 14px;
+    color: #ffc000;
+    cursor: pointer;
+    }
+
+
+/* /Store rows */
