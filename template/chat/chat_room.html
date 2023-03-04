@@ -1,4 +1,9 @@
 {% extends 'layout.html' %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+{% endblock %}
+
 {% block body %}
 <script>
     function ajax(){
@@ -59,7 +64,7 @@
             {% else %}
                 <div style="text-align: center;">
                     <h1>Bienvenido a la sala de chat</h1>
-                    <p class="lead">Selecciona a los usuarios e inicia una conversacion...</p>
+                    <p class="lead">Selecciona al usuario e inicia una conversacion...</p>
                 </div>
             {% endif %}
         {% endif %}
