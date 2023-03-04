@@ -66,21 +66,21 @@ def login():
 def Home():
     return  render_template('auth/home.html')
 #
-# @app.route('/Mycart')
-# def Mycart():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Pefil')
-# def Pefil():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Mercado')
-# def Mercado():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Mensaje')
-# def Mensaje():
-#     return  redirect(url_for('login'))
+@app.route('/Mycart')
+def Mycart():
+    return  redirect(url_for('login'))
+
+@app.route('/Pefil')
+def Pefil():
+    return  redirect(url_for('login'))
+
+@app.route('/Mercado')
+def Mercado():
+    return  redirect(url_for('login'))
+
+@app.route('/Mensaje')
+def Mensaje():
+    return  redirect(url_for('login'))
 
 
 if __name__ == '__main__':

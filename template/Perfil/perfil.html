@@ -1,0 +1,66 @@
+{% extends '/perfil.html' %}
+
+{% block title %}<h1>Perfil</h1>{% endblock %}
+
+{% block customCSS %}
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    label {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    input, textarea {
+        padding: 10px;
+        border: none;
+        border-radius: 3px;
+        margin-bottom: 20px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Estilos CSS para la imagen de perfil */
+    .imagenperfil {
+        max-width: 200px;
+        margin-bottom: 20px;
+    }
+
+{% endblock %}
+<body>
+   <h1>Perfil de Empresa</h1>
+    <form action="/actualizar_perfil" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="id_empresa" value="{{ empresa.id_empresa }}">
+        <input type="hidden" name="id_dueno" value="{{ empresa.id_dueno }}">
+
+        <label for="e_nombre">Nombre:</label>
+        <input type="text" name="e_nombre" id="e_nombre" value="{{ empresa.e_nombre }}" required>
+
+        <label for="e_password">Contraseña:</label>
+        <input type="password" name="e_password" id="e_password" value="{{ empresa.e_password }}" required>
+
+        <label for="e_mail">Correo electrónico:</label>
+        <input type="email" name="e_mail" id="e_mail" value="{{ empresa.e_mail }}" required>
+
+        <label for="e_celular">Celular:</label>
+        <input type="text" name="e_celular" id="e_celular" value="{{ empresa.e_celular }}" required>
+
+        <label for="e_ubicacion">Ubicación:</label>
+        <textarea name="e_ubicacion" id="e_ubicacion" rows="5" required>{{ empresa.e_ubicacion }}</textarea>
+
+        <label for="e_imagenperfil">Imagen de perfil:</label>
+        <img src="{{ empresa.e_imagenperfil }}" alt="Imagen de perfil" class="imagenperfil">
+        <input type="file" name="e_imagenperfil" id="e_imagenperfil">
+        <input type="submit" value="Actualizar perfil">
+    </form> 
+</body>
+
+{% block body %}
