@@ -1,13 +1,8 @@
-{% extends '/base.html' %}
+{% extends './base.html' %}
 
-{% block title %}HOMEEE{% endblock %}
-
-{% block customCSS %}
-
-{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-
-<p>Holaaaa</p>
-
+<h1>Bienvenido, {{ current_user.fullname }}</h1>
+<a class="btn btn-secondary" href="{{ url_for('logout') }}">Logout</a>
 {% endblock %}

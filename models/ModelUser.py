@@ -7,15 +7,32 @@ class ModelUser():
         try:
             cursor = db.connection.cursor()
             print("Sigo vivo")
-            sql = """SELECT id_empresa, id_dueno, 
-                    e_nombre, e_username, e_password, e_email,
-                     e_celular, e_ubicacion, e_imagenperfil 
-                     FROM empresa where e_username = '{}' """.format(user.e_username)
+            sql = """SELECT id_usuario, a_name, a_username, a_password, 
+                    a_email, a_descipcion, a_celular, a_ubicacion, a_imagenperfil 
+                     FROM usuario where a_username = '{}' """.format(user.a_username)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
-                user=User(row[0],row[1],row[2],row[3], User.check_password(row[4], user.e_password), row[5], row[6], row[7], row[8] )
-                return user
+                return User(row[0],row[1],row[2], User.check_password(row[3], user.a_password), row[4], row[5], row[6], row[7], row[8] )
+
+            else:
+                return None
+        except Exception as ex:
+            raise Exception(ex)
+    @classmethod
+    def get_by_id(self, db,id_usuario):
+        try:
+            cursor = db.connection.cursor()
+            print("Sigo vivo")
+            sql = """SELECT id_usuario, a_name, a_username, a_email,
+                    a_descipcion, a_celular, a_ubicacion, a_imagenperfil 
+                     FROM usuario where id_usuario = '{}' """.format(id_usuario)
+            cursor.execute(sql)
+            row = cursor.fetchone()
+            print("Sigo vivo")
+            if row != None:
+                return User(row[0],row[1],row[2],None,row[3],row[4], row[5], row[6], row[7] )
+
             else:
                 return None
         except Exception as ex:

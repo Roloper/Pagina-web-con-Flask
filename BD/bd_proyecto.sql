@@ -25,18 +25,6 @@ SET time_zone = "-05:00";
 -- Estructura de tabla para la tabla `empresa`
 --
 
-CREATE TABLE `empresa` (
-  `id_empresa` int(200) NOT NULL,
-  `id_dueno` int(200) NOT NULL,
-  `e_nombre` varchar(255) NOT NULL,
-  `e_username` varchar(255) NOT NULL,
-  `e_password` varchar(255) NOT NULL,
-  `e_email` varchar(255) NOT NULL,
-  `e_celular` varchar(20) NOT NULL,
-  `e_ubicacion` varchar(255) NOT NULL,
-  `e_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 
 --
@@ -79,6 +67,7 @@ CREATE TABLE `usuario` (
   `a_username` varchar(255) NOT NULL,
   `a_password` varchar(255) NOT NULL,
   `a_email` varchar(255) NOT NULL,
+  `a_descipcion` varchar(255) NOT NULL,
   `a_celular` varchar(20) NOT NULL,
   `a_ubicacion` varchar(255) NOT NULL,
   `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
@@ -90,14 +79,7 @@ CREATE TABLE `usuario` (
 
 --
 -- Indices de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id_empresa`),
-  ADD KEY `id_dueno` (`id_dueno`);
 
---
--- Indices de la tabla `mycart`
---
 ALTER TABLE `mycart`
   ADD PRIMARY KEY (`id_cart`),
   ADD KEY `id_producto` (`id_producto`),

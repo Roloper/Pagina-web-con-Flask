@@ -12,7 +12,13 @@ from models.entities.User import User
 
 app = Flask(__name__, template_folder='template')
 
+csrf=CSRFProtect()
 db = MySQL(app)
+login_manager_app = LoginManager(app)
+
+@login_manager_app.user_loader
+def load_user(id_usuario):
+    return ModelUser.get_by_id(db, id_usuario)
 
 #URL PRINCIPAL
 @app.route('/')
@@ -23,66 +29,56 @@ def index():
 @app.route('/login', methods = ['GET','POST']) #persona o empresa
 def login():
     if request.method == 'POST':
-        #print(request.form['username'])
-        #print(request.form['password'])
-        user = User(0,0,0,request.form['username'], request.form['password'],0,0,0,0)
+        print(request.form['a_username'])
+        print(request.form['a_password'])
+        user = User(0,0,request.form['a_username'], request.form['a_password'],0,0,0,0,0)
         logged_user = ModelUser.login(db,user)
 
         if logged_user != None:
-            if logged_user.e_password:
+            if logged_user.a_password:
+                login_user(logged_user)
                 return redirect(url_for('Home'))
             else:
+                print("contra incorrecta")
                 flash("Contraseña Incorrecta")
                 return render_template('auth/login.html')
         else:
+            print("No se encontro usuario")
             flash("Usuario no encontrado")
             return render_template('auth/login.html')
     else:
         return render_template('auth/login.html')
 
-# #URL DEL REGISTRO (ELEGIR OPCION)
-# @app.route('/register', methods =['GET','POST'])
-# def register():
-#     if request.method == 'POST':
-#         return render_template('auth/AoE.html')
-#     else:
-#         return render_template('auth/AoE.html')
-#
-# @app.route('/registerE', methods =['GET','POST'])
-# def registerE():
-#     if request.method == 'POST':
-#         return render_template('auth/registerE.html')
-#     else:
-#         return render_template('auth/registerE.html')
+#Redireccion para el cierre de sesion
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+#URL DEL REGISTRO
+@app.route('/register', methods =['GET','POST'])
+def register():
+    if request.method == 'POST':
+        return render_template('auth/register.html')
+    else:
+        return render_template('auth/register.html')
 
-# @app.route('/registerA', methods =['GET','POST'])
-# def registerA():
-#     if request.method == 'POST':
-#         return render_template('auth/registerA.html')
-#     else:
-#         return render_template('auth/registerA.html')
-#
+#url de home para pagina principal
 @app.route('/Home')
+@login_required
 def Home():
     return  render_template('auth/home.html')
-#
-# @app.route('/Mycart')
-# def Mycart():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Pefil')
-# def Pefil():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Mercado')
-# def Mercado():
-#     return  redirect(url_for('login'))
-#
-# @app.route('/Mensaje')
-# def Mensaje():
-#     return  redirect(url_for('login'))
 
+
+
+def status_401(error):
+    return redirect(url_for('index'))
+
+def status_404(error):
+    return "<h1> Pagino no encontrada</h1>", 404
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
+    csrf.init_app(app)
+    app.register_error_handler(401,status_401)
+    app.register_error_handler(404, status_404)
     app.run()
