@@ -1,5 +1,5 @@
 from .entities.User import User
-import base64
+
 class ModelUser():
 
     @classmethod

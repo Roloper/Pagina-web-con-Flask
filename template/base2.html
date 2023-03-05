@@ -9,49 +9,58 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/flask.svg') }}">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+JQL9lUvYjZEENmEwOO8wUWGs5KXbPk"
-        crossorigin="anonymous">
+          integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+JQL9lUvYjZEENmEwOO8wUWGs5KXbPk"
+          crossorigin="anonymous">
     <!-- Custom css -->
     {% block customCSS %}
     {% endblock %}
 </head>
 
 <body class="text-center">
-    <nav class="navbar navbar-expand-lg navbar-light bg-success">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Mi aplicación</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="Home">Little Green</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil">Mi perfil</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="carrito">Tienda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="chats">Mensajería</a>
-                    </li>
-                    <li class="nav-item">
-                        <form action="/logout" method="GET">
-                            <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <form class="d-flex" action="{{ url_for('buscar') }}" method="POST">
+                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar"
+                               name="busqueda">
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    </form>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="perfil">Mi perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="carrito">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="chats">Mensajería</a>
+                </li>
+                <li class="nav-item">
+                    <form action="/logout" method="GET">
+                        <button type="submit" class="btn btn-link nav-link">Cerrar sesión</button>
+                    </form>
+                </li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    {% block body %}
-    {% endblock %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+{% block body %}
+{% endblock %}
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
 </body>

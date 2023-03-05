@@ -19,7 +19,7 @@ db = MySQL(app)
 login_manager_app = LoginManager(app)
 
 app.config['UPLOAD_FOLDER'] = 'static/img'
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'net'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'NEF'}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -97,6 +97,20 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/buscar', methods=['POST'])
+def buscar():
+    if request.method == 'POST':
+        search_query = request.form['search_query']  # obtener el término de búsqueda
+        # ejecutar una búsqueda en la base de datos para obtener resultados
+        results = ModelUser.buscar_amigos(db, search_query)
+        # renderizar la plantilla con los resultados
+        return render_template('resultado_busqueda.html', results=results)
+    else:
+        # en caso de que el método no sea POST, redirigir al inicio
+        return redirect(url_for('Home'))
+
+
+
 #url de home para pagina principal
 @app.route('/Home')
 @login_required
@@ -113,6 +127,7 @@ def chats():
     return  render_template('Chat/chat_room.html')
 
 @app.route('/carrito')
+@login_required
 def carrito():
     return  render_template('carrito/mycart.html')
 

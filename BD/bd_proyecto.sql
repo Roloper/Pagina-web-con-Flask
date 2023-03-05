@@ -18,12 +18,8 @@ SET time_zone = "-05:00";
 
 --
 -- Base de datos: `bd_proyecto`
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `empresa`
---
+
 
 -- --------------------------------------------------------
 
@@ -52,7 +48,7 @@ CREATE TABLE `producto` (
   `p_categoria` varchar(255) NOT NULL,
   `p_descripcion` varchar(255) NOT NULL,
   `p_precio` float NOT NULL,
-  `p_imagenproducto` varchar(255) NOT NULL DEFAULT 'blank.png'
+  `p_imagenproducto` varchar(5000)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -92,47 +88,28 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_mensajes`)
 ) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
---
---
+
 --INSERT INTO `messages` (`id`, `body`, `msg_by`, `msg_to`, `msg_time`) VALUES
 --(178, 'hlw', 9, 12, '2018-07-23 14:13:38'),
 --(177, 'hi', 12, 9, '2018-07-23 14:13:26');
---
---
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `empresa`
 
 ALTER TABLE `mycart`
   ADD PRIMARY KEY (`id_cart`),
   ADD KEY `id_producto` (`id_producto`),
   ADD KEY `id_usuario_comprador` (`id_usuario_comprador`);
 
---
 -- Indices de la tabla `producto`
---
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
   ADD KEY `id_usuario` (`id_usuario`);
 
---
 -- Indices de la tabla `usuario`
---
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
---
 
---
-
-
---
 -- AUTO_INCREMENT de la tabla `mycart`
 --
 ALTER TABLE `mycart`
