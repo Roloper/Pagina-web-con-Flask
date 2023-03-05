@@ -62,7 +62,7 @@ CREATE TABLE `producto` (
 --
 
 CREATE TABLE `usuario` (
-  `id_usuario` int(200) NOT NULL,
+  `id_usuario` int(200) NOT NULL AUTO_INCREMENT,
   `a_name` varchar(255) NOT NULL,
   `a_username` varchar(255) NOT NULL,
   `a_password` varchar(255) NOT NULL,
@@ -71,6 +71,9 @@ CREATE TABLE `usuario` (
   `a_celular` varchar(20) NOT NULL,
   `a_ubicacion` varchar(255) NOT NULL,
   `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
+  `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `online` varchar(1) NOT NULL DEFAULT '0',
+   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- agregar estos campos a usuario
@@ -80,13 +83,14 @@ CREATE TABLE `usuario` (
 
 -- crear tabla para los mensajes
 DROP TABLE IF EXISTS `messages`;
+
 CREATE TABLE IF NOT EXISTS `messages` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_mensajes` int(11) NOT NULL AUTO_INCREMENT,
   `body` text NOT NULL,
   `msg_by` int(11) NOT NULL,
   `msg_to` int(11) NOT NULL,
   `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id_mensajes`)
 ) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
 --
 --
@@ -126,10 +130,7 @@ ALTER TABLE `usuario`
 --
 
 --
--- AUTO_INCREMENT de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  MODIFY `id_empresa` int(200) NOT NULL AUTO_INCREMENT;
+
 
 --
 -- AUTO_INCREMENT de la tabla `mycart`

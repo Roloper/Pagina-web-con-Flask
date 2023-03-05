@@ -3,6 +3,7 @@ body{
 }
 header, .alert{
   z-index: 100;
+  background-color: #FF0000;
 }
 .description{
   height: 25px;

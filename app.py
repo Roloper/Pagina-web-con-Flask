@@ -3,7 +3,8 @@ from config import config
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required
-
+from werkzeug.utils import secure_filename
+import os
 #Models
 from models.ModelUser import ModelUser
 
@@ -11,10 +12,18 @@ from models.ModelUser import ModelUser
 from models.entities.User import User
 
 app = Flask(__name__, template_folder='template')
-
 csrf=CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
+app.config['UPLOAD_FOLDER'] = 'uploads'
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'net'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+
 
 @login_manager_app.user_loader
 def load_user(id_usuario):
@@ -59,6 +68,20 @@ def logout():
 @app.route('/register', methods =['GET','POST'])
 def register():
     if request.method == 'POST':
+        # Validar que el archivo sea una imagen .png
+        if 'a_imagenperfil' not in request.files:
+            flash('No se seleccionó ningún archivo')
+            return redirect(request.url)
+        file = request.files['a_imagenperfil']
+        if file.filename == '':
+            flash('No se seleccionó ningún archivo')
+            return redirect(request.url)
+        if not allowed_file(file.filename):
+            flash('Solo se permiten archivos con extensión .png')
+            return redirect(request.url)
+        filename = secure_filename(file.filename)
+
+    if request.method == 'POST':
         user = User(
             None,
             request.form['a_name'],
@@ -68,10 +91,10 @@ def register():
             request.form['a_descripcion'],
             request.form['a_celular'],
             request.form['a_ubicacion'],
-            request.form['a_imagenperfil']
+            filename
         )
         try:
-            ModelUser.register_user(db, user)
+            ModelUser.register(db, user)
             return "Registro exitoso"
         except Exception as ex:
             return str(ex)
@@ -90,9 +113,14 @@ def perfil():
     return  render_template('./perfil/perfil.html')
 
 
-@app.route('/Chats')
-def Chats():
+@app.route('/chats')
+def chats():
     return  render_template('Chat/chat_room.html')
+
+@app.route('/carrito')
+def carrito():
+    return  render_template('carrito/mycart.html')
+
 
 def status_401(error):
     return redirect(url_for('index'))

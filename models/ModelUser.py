@@ -7,7 +7,7 @@ class ModelUser():
         try:
             cursor = db.connection.cursor()
             sql = """SELECT id_usuario, a_name, a_username, a_password, 
-                    a_email, a_descipcion, a_celular, a_ubicacion, a_imagenperfil 
+                    a_email, a_descripcion, a_celular, a_ubicacion, a_imagenperfil 
                      FROM usuario where a_username = '{}' """.format(user.a_username)
             cursor.execute(sql)
             row = cursor.fetchone()
@@ -24,7 +24,7 @@ class ModelUser():
             cursor = db.connection.cursor()
             print("Sigo vivo")
             sql = """SELECT id_usuario, a_name, a_username, a_email,
-                    a_descipcion, a_celular, a_ubicacion, a_imagenperfil 
+                    a_descripcion, a_celular, a_ubicacion, a_imagenperfil 
                      FROM usuario where id_usuario = '{}' """.format(id_usuario)
             cursor.execute(sql)
             row = cursor.fetchone()
@@ -40,10 +40,10 @@ class ModelUser():
     def register(cls, db, user):
         try:
             cursor = db.connection.cursor()
-            sql = """INSERT INTO usuario(a_name, a_username, a_password, a_email, a_descipcion, a_celular, a_ubicacion, a_imagenperfil) 
+            sql = """INSERT INTO usuario(a_name, a_username, a_password, a_email, a_descripcion, a_celular, a_ubicacion, a_imagenperfil) 
                      VALUES('{}', '{}', '{}', '{}', '{}', '{}', '{}', '{}')""".format(
-                user.a_name, user.a_username, user.get_password_hash(user.a_password),
-                user.a_email, user.a_descipcion, user.a_celular, user.a_ubicacion, user.a_imagenperfil)
+                user.a_name, user.a_username, user.hash_password(user.a_password),
+                user.a_email, user.a_descripcion, user.a_celular, user.a_ubicacion, user.a_imagenperfil)
             cursor.execute(sql)
             db.connection.commit()
             return True

@@ -11,6 +11,7 @@
     <img class="mb-4" src="{{ url_for('static', filename='img/escudo.png') }}" alt="" width="100" height="60">
 
     <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <!-- Agregar el campo CSRF token -->
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="form-floating">
         <input type="text" class="form-control" id="username" name="a_username" placeholder="Username">

@@ -8,68 +8,70 @@
 
 {% block body %}
 <form class="form-horizontal" action="/register" method="POST" enctype="multipart/form-data">
+    <!-- Agregar el campo CSRF token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
     <div class="form-group">
       <label for="inputName" class="col-sm-2 control-label">Nombre y apellido de dueño</label>
       <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputName" name = "a_name" placeholder="a_name">
+      <input type="text" class="form-control" id="inputName" name = "a_name" placeholder="a_name" required>
       </div>
     </div>
 
     <div class="form-group">
       <label for="inputUser" class="col-sm-2 control-label">Nombre de Empresa</label>
       <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputUser" name ="a_username" placeholder="a_username">
+      <input type="text" class="form-control" id="inputUser" name ="a_username" placeholder="a_username" required>
       </div>
     </div>
 
     <div class="form-group">
         <label for="inputPassword" class="col-sm-2 control-label">Contraseña</label>
         <div class="col-sm-10">
-        <input type="password" class="form-control" id="inputPassword" name ="a_password" placeholder="a_password">
+        <input type="password" class="form-control" id="inputPassword" name ="a_password" placeholder="a_password" required>
         </div>
     </div>
 
     <div class="form-group">
-      <label for="inputEmail" class="col-sm-2 control-label">Correo electrónico</label>
+      <label for="inputEmail" class="col-sm-2 control-label">Correo</label>
       <div class="col-sm-10">
-      <input type="email" class="form-control" id="inputEmail" name ="a_email" placeholder="a_email">
-      </div>
-    </div>
-
-
-
-    <div class="form-group">
-      <label for="inputCell" class="col-sm-2 control-label">Numero de Celular</label>
-      <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputCell" name ="a_celular" placeholder="a_celular">
+      <input type="text" class="form-control" id="inputEmail" name ="a_email" placeholder="a_email" required>
       </div>
     </div>
 
     <div class="form-group">
-      <label for="inputDir" class="col-sm-2 control-label">Descipcion de empresa</label>
+      <label for="inputDes" class="col-sm-2 control-label">Descipcion de Empresa</label>
       <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputDes" name ="a_descipcion" placeholder="a_descipcion">
+      <input type="text" class="form-control" id="inputDes" name ="a_descripcion" placeholder="a_descripcion" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="inputCelular" class="col-sm-2 control-label">Celular</label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="inputCelular" name ="a_celular" placeholder="a_celular" required>
       </div>
     </div>
 
     <div class="form-group">
       <label for="inputDir" class="col-sm-2 control-label">Direccion</label>
       <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputDir" name ="a_ubicacion" placeholder="a_ubicacion">
+      <input type="text" class="form-control" id="inputDir" name ="a_ubicacion" placeholder="a_ubicacion" required>
       </div>
     </div>
 
     <div class="form-group">
         <label for="inputImg" class="col-sm-2 control-label">Imagen de perfil</label>
         <div class="col-sm-10">
-        <input type="file" class="form-control-file" id="inputImg" name="a_imagenperfil" placeholder="imagen">
+        <input type="file" class="form-control-file" id="inputImg" name="a_imagenperfil" accept="image/png" placeholder="imagen">
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
         <button type="submit" class="btn btn-primary">Registrarse</button>
-    </div>
+        <a href="/" class="btn btn-secondary">Volver a inicio</a>
+        </div>
     </div>
 </form>
 
