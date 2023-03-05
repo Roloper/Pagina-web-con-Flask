@@ -37,7 +37,7 @@ def login():
         if logged_user != None:
             if logged_user.a_password:
                 login_user(logged_user)
-                return redirect(url_for('Home'))
+                return redirect(url_for('home'))
             else:
                 print("contra incorrecta")
                 flash("Contraseña Incorrecta")
@@ -70,7 +70,6 @@ def register():
             request.form['a_ubicacion'],
             request.form['a_imagenperfil']
         )
-
         try:
             ModelUser.register_user(db, user)
             return "Registro exitoso"
@@ -81,19 +80,15 @@ def register():
         return render_template('auth/register.html')
 
 #url de home para pagina principal
-@app.route('/Home')
+@app.route('/home')
 @login_required
-def Home():
+def home():
     return  render_template('auth/home.html')
 
-@app.route('/Perfil')
-def Perfil():
-    return  redirect(url_for('Perfil'))
+@app.route('/perfil')
+def perfil():
+    return  render_template('./perfil/perfil.html')
 
-
-@app.route('/Mensaje')
-def Mensaje():
-    return  redirect(url_for('login'))
 
 @app.route('/Chats')
 def Chats():
