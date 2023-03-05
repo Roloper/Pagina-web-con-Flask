@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e78599bc-fb5f-4d5d-8f46-a7f4b30c0a0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/template/base2.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ModelUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ModelUser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/Chats/mensajeria.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/Chats/mensajeria.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/template/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,17 +37,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\static\css" />
       <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\template" />
     </key>
   </component>

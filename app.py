@@ -23,7 +23,7 @@ def load_user(id_usuario):
 #URL PRINCIPAL
 @app.route('/')
 def index():
-    return redirect(url_for('index.html'))
+    return render_template('auth/index.html')
 
 #URL PARA EL LOGIN
 @app.route('/login', methods = ['GET','POST']) #persona o empresa
