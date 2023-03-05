@@ -67,10 +67,10 @@ CREATE TABLE `usuario` (
   `a_username` varchar(255) NOT NULL,
   `a_password` varchar(255) NOT NULL,
   `a_email` varchar(255) NOT NULL,
-  `a_descipcion` varchar(255) NOT NULL,
+  `a_descripcion` varchar(255) NOT NULL,
   `a_celular` varchar(20) NOT NULL,
   `a_ubicacion` varchar(255) NOT NULL,
-  `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
+  `a_imagenperfil` BLOB,
   `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `online` varchar(1) NOT NULL DEFAULT '0',
    PRIMARY KEY (`id_usuario`)

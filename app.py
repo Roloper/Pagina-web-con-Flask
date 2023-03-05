@@ -5,6 +5,8 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 import os
+import requests
+
 #Models
 from models.ModelUser import ModelUser
 
@@ -16,7 +18,7 @@ csrf=CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
 app.config['UPLOAD_FOLDER'] = 'uploads'
-
+UPLOAD_FOLDER = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'net'}
 
 def allowed_file(filename):
@@ -46,7 +48,7 @@ def login():
         if logged_user != None:
             if logged_user.a_password:
                 login_user(logged_user)
-                return redirect(url_for('home'))
+                return redirect(url_for('Home'))
             else:
                 print("contra incorrecta")
                 flash("Contraseña Incorrecta")
@@ -58,17 +60,11 @@ def login():
     else:
         return render_template('auth/login.html')
 
-#Redireccion para el cierre de sesion
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('index'))
-
 #URL DEL REGISTRO-
 @app.route('/register', methods =['GET','POST'])
 def register():
     if request.method == 'POST':
-        # Validar que el archivo sea una imagen .png
+        # Validar que el archivo sea una imagen .png, .jpg, .jpeg o .net
         if 'a_imagenperfil' not in request.files:
             flash('No se seleccionó ningún archivo')
             return redirect(request.url)
@@ -77,7 +73,7 @@ def register():
             flash('No se seleccionó ningún archivo')
             return redirect(request.url)
         if not allowed_file(file.filename):
-            flash('Solo se permiten archivos con extensión .png')
+            flash('Solo se permiten archivos con extensión .png, .jpg, .jpeg o .net ')
             return redirect(request.url)
         filename = secure_filename(file.filename)
 
@@ -95,17 +91,24 @@ def register():
         )
         try:
             ModelUser.register(db, user)
-            return "Registro exitoso"
+            return redirect(url_for('login'))
+
         except Exception as ex:
             return str(ex)
 
     else:
         return render_template('auth/register.html')
 
+#Redireccion para el cierre de sesion
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 #url de home para pagina principal
-@app.route('/home')
+@app.route('/Home')
 @login_required
-def home():
+def Home():
     return  render_template('auth/home.html')
 
 @app.route('/perfil')

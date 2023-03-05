@@ -22,5 +22,8 @@ class User(UserMixin):
 
     @staticmethod
     def hash_password(password):
-        hashed_password =  generate_password_hash(password)
-        return hashed_password
+        return generate_password_hash(password)
+
+
+
+#print(User.check_password('pbkdf2:sha256:260000$WuxTsXivJXCtlxPp$c1168c24862b68e9356bdd86866fdc2b4468eee91e8997cbe6941a9b1a0fef80','12345'))
