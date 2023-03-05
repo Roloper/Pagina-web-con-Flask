@@ -6,12 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e78599bc-fb5f-4d5d-8f46-a7f4b30c0a0f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ModelUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ModelUser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BD/bd_proyecto.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BD/bd_proyecto.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/cover.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/cover.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/Cover Template · Bootstrap v5.3.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/Cover Template · Bootstrap v5.3_files/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/Cover Template · Bootstrap v5.3_files/cover.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/Chats/mensajeria.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

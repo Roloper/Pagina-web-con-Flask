@@ -79,15 +79,15 @@ CREATE TABLE `usuario` (
 --
 
 -- crear tabla para los mensajes
---DROP TABLE IF EXISTS `messages`;
---CREATE TABLE IF NOT EXISTS `messages` (
---  `id` int(11) NOT NULL AUTO_INCREMENT,
---  `body` text NOT NULL,
---  `msg_by` int(11) NOT NULL,
---  `msg_to` int(11) NOT NULL,
---  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
---  PRIMARY KEY (`id`)
---) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `body` text NOT NULL,
+  `msg_by` int(11) NOT NULL,
+  `msg_to` int(11) NOT NULL,
+  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
 --
 --
 --INSERT INTO `messages` (`id`, `body`, `msg_by`, `msg_to`, `msg_time`) VALUES

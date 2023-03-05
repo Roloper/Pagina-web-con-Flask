@@ -86,7 +86,9 @@ def register():
 def Home():
     return  render_template('auth/home.html')
 
-
+@app.route('/Chats')
+def Chats():
+    return  render_template('Chat/chat_room.html')
 
 def status_401(error):
     return redirect(url_for('index'))
