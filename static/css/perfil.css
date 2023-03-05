@@ -1,0 +1,30 @@
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+input, textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+/* Estilos CSS para la imagen de perfil */
+.imagenperfil {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
