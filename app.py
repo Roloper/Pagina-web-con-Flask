@@ -85,19 +85,11 @@ def register():
 @login_required
 def Home():
     return  render_template('auth/home.html')
-<<<<<<< HEAD
-#
-@app.route('/Mycart')
-def Mycart():
-    return  redirect(url_for('login'))
 
-@app.route('/Pefil')
-def Pefil():
-    return  redirect(url_for('login'))
+@app.route('/Perfil')
+def Perfil():
+    return  redirect(url_for('Perfil'))
 
-@app.route('/Mercado')
-def Mercado():
-    return  redirect(url_for('login'))
 
 @app.route('/Mensaje')
 def Mensaje():
