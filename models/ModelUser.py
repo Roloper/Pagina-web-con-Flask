@@ -6,7 +6,6 @@ class ModelUser():
     def login(self, db,user):
         try:
             cursor = db.connection.cursor()
-            print("Sigo vivo")
             sql = """SELECT id_usuario, a_name, a_username, a_password, 
                     a_email, a_descipcion, a_celular, a_ubicacion, a_imagenperfil 
                      FROM usuario where a_username = '{}' """.format(user.a_username)
@@ -29,7 +28,6 @@ class ModelUser():
                      FROM usuario where id_usuario = '{}' """.format(id_usuario)
             cursor.execute(sql)
             row = cursor.fetchone()
-            print("Sigo vivo")
             if row != None:
                 return User(row[0],row[1],row[2],None,row[3],row[4], row[5], row[6], row[7] )
 
