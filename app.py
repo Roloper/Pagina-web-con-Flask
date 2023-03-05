@@ -102,8 +102,6 @@ def Mercado():
 @app.route('/Mensaje')
 def Mensaje():
     return  redirect(url_for('login'))
-=======
->>>>>>> a8888e364e4b3bf2758b0ca1ec23315ed6e109f8
 
 @app.route('/Chats')
 def Chats():
