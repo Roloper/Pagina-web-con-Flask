@@ -1,13 +1,7 @@
-{% extends '/base.html' %}
+{% extends './base2.html' %}
 
-{% block title %}HOMEEE{% endblock %}
-
-{% block customCSS %}
-
-{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-
-<p>Holaaaa</p>
-
+<h1>Bienvenido, {{ current_user.a_username }}</h1>
 {% endblock %}

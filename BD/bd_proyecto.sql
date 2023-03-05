@@ -25,18 +25,6 @@ SET time_zone = "-05:00";
 -- Estructura de tabla para la tabla `empresa`
 --
 
-CREATE TABLE `empresa` (
-  `id_empresa` int(200) NOT NULL,
-  `id_dueno` int(200) NOT NULL,
-  `e_nombre` varchar(255) NOT NULL,
-  `e_username` varchar(255) NOT NULL,
-  `e_password` varchar(255) NOT NULL,
-  `e_email` varchar(255) NOT NULL,
-  `e_celular` varchar(20) NOT NULL,
-  `e_ubicacion` varchar(255) NOT NULL,
-  `e_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- --------------------------------------------------------
 
 --
@@ -79,10 +67,34 @@ CREATE TABLE `usuario` (
   `a_username` varchar(255) NOT NULL,
   `a_password` varchar(255) NOT NULL,
   `a_email` varchar(255) NOT NULL,
+  `a_descipcion` varchar(255) NOT NULL,
   `a_celular` varchar(20) NOT NULL,
   `a_ubicacion` varchar(255) NOT NULL,
   `a_imagenperfil` varchar(255) NOT NULL DEFAULT 'png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- agregar estos campos a usuario
+--`reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+--`online` varchar(1) NOT NULL DEFAULT '0', 0 o 1 para marcar si el usuario esta conectado
+--
+
+-- crear tabla para los mensajes
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `body` text NOT NULL,
+  `msg_by` int(11) NOT NULL,
+  `msg_to` int(11) NOT NULL,
+  `msg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
+--
+--
+--INSERT INTO `messages` (`id`, `body`, `msg_by`, `msg_to`, `msg_time`) VALUES
+--(178, 'hlw', 9, 12, '2018-07-23 14:13:38'),
+--(177, 'hi', 12, 9, '2018-07-23 14:13:26');
+--
+--
 
 --
 -- Índices para tablas volcadas
@@ -90,14 +102,7 @@ CREATE TABLE `usuario` (
 
 --
 -- Indices de la tabla `empresa`
---
-ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id_empresa`),
-  ADD KEY `id_dueno` (`id_dueno`);
 
---
--- Indices de la tabla `mycart`
---
 ALTER TABLE `mycart`
   ADD PRIMARY KEY (`id_cart`),
   ADD KEY `id_producto` (`id_producto`),
