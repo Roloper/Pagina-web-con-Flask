@@ -17,8 +17,8 @@ app = Flask(__name__, template_folder='template')
 csrf=CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
-app.config['UPLOAD_FOLDER'] = 'uploads'
-UPLOAD_FOLDER = 'static/img'
+
+app.config['UPLOAD_FOLDER'] = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'net'}
 
 def allowed_file(filename):
@@ -61,23 +61,16 @@ def login():
         return render_template('auth/login.html')
 
 #URL DEL REGISTRO-
-@app.route('/register', methods =['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        # Validar que el archivo sea una imagen .png, .jpg, .jpeg o .net
-        if 'a_imagenperfil' not in request.files:
-            flash('No se seleccionó ningún archivo')
-            return redirect(request.url)
-        file = request.files['a_imagenperfil']
-        if file.filename == '':
-            flash('No se seleccionó ningún archivo')
-            return redirect(request.url)
-        if not allowed_file(file.filename):
-            flash('Solo se permiten archivos con extensión .png, .jpg, .jpeg o .net ')
-            return redirect(request.url)
-        filename = secure_filename(file.filename)
+        img_filename = ''
+        if 'a_imagenperfil' in request.files:
+            file = request.files['a_imagenperfil']
+            if file.filename != '':
+                img_filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
 
-    if request.method == 'POST':
         user = User(
             None,
             request.form['a_name'],
@@ -87,7 +80,7 @@ def register():
             request.form['a_descripcion'],
             request.form['a_celular'],
             request.form['a_ubicacion'],
-            filename
+            img_filename
         )
         try:
             ModelUser.register(db, user)
@@ -98,7 +91,6 @@ def register():
 
     else:
         return render_template('auth/register.html')
-
 #Redireccion para el cierre de sesion
 @app.route('/logout')
 def logout():

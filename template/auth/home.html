@@ -3,9 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
+
 <div class="row">
     <div class="col-md-3">
-        <img src="http://localhost/images/profile.jpg" alt="{{ current_user.a_username }}'s profile picture" class="img-thumbnail">
+        <img src="{{ url_for('static', filename='img/' + current_user.a_imagenperfil) }}"
+             alt="{{ current_user.a_username }}'s profile picture" class="img-thumbnail">
     </div>
     <div class="col-md-6">
         <!-- Aquí van las publicaciones de los amigos -->
@@ -13,7 +15,6 @@
     </div>
     <div class="col-md-3">
         <h3>Amigos sugeridos:</h3>
-
     </div>
 </div>
 {% endblock %}

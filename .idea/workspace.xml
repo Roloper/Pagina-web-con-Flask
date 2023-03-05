@@ -9,22 +9,7 @@
       <change beforePath="$PROJECT_DIR$/BD/bd_proyecto.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BD/bd_proyecto.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/ModelUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ModelUser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/entities/User.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/entities/User.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/beet.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/broccoli.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/cabbage_PNG8815.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/cabbage_PNG8823.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/carrot_PNG4988.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/corn_PNG5286.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/garlic_PNG12801.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/ginger_PNG16800.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/mushroom_PNG3219.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/onion_PNG3821.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/palm_tree_PNG93356.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/img/wheat_PNG108.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/template/auth/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/base2.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/base2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
