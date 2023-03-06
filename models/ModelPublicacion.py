@@ -7,11 +7,11 @@ class ModelPublicaciones():
     def create_publicacion(cls, db, public):
         try:
             cursor = db.connection.cursor()
-            sql = """INSERT INTO publicaciones (id_usuario, titulo, contenido, imagen, fecha)
+            sql = """INSERT INTO publicaciones (id_usuario, titulo, contenido, imagen)
                      VALUES (%s, %s, %s, %s)"""
-            cursor.execute(sql, (public.id_usuario, public.titulo, public.contenido, public.imagen, public.fecha))
+            cursor.execute(sql,(public.id_usuario, public.titulo, public.contenido, public.imagen))
             db.connection.commit()
-            return cursor.lastrowid
+            return True
         except Exception as ex:
             db.connection.rollback()
             raise Exception(ex)

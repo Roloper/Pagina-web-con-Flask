@@ -36,7 +36,7 @@ CREATE TABLE publicaciones (
   id_usuario INT NOT NULL,
   titulo VARCHAR(255) NOT NULL,
   contenido TEXT NOT NULL,
-  imagen LONGBLOB,
+  imagen VARCHAR(255),
   fecha_publicacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_publicacion),
   FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)

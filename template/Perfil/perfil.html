@@ -19,18 +19,19 @@
         </div>
     </div>
     <div class="col-md-6">
-        <form method="POST" action="/perfil">
+        <form method="POST" action="/perfil" enctype="multipart/form-data">
             <!-- Agregar el campo CSRF token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <input type="text" name="titulo" placeholder="Título" class="form-control" required>
             </div>
             <div class="form-group">
-                <textarea name="contenido" placeholder="Escribe algo..." class="form-control" rows="3"
-                          required></textarea>
+        <textarea name="contenido" placeholder="Escribe algo..." class="form-control" rows="3"
+                  required></textarea>
             </div>
             <div class="form-group">
-                <input type="file" name="imagen" class="form-control-file">
+                <input type="file" class="form-control-file" id="inputImg" name="imagen" accept="image/png"
+                       placeholder="imagen">
             </div>
             <button type="submit" class="btn btn-primary">Publicar</button>
         </form>
@@ -41,9 +42,6 @@
         <ul class="list-unstyled">
             {% for publicacion in publicaciones %}
             <li class="media">
-                <img src="{{ url_for('static', filename='img/' + publicacion.id_usuario.a_imagenperfil) }}"
-                     alt="{{ publicacion.id.usuario.a_username }}'s profile picture" class="mr-3 rounded-circle"
-                     style="width: 64px; height: 64px;">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ publicacion.titulo }}</h5>
                     {{ publicacion.contenido }}

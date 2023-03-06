@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, send_from_directory
 from config import config
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
@@ -21,7 +21,6 @@ app = Flask(__name__, template_folder='template')
 csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
-
 app.config['UPLOAD_FOLDER'] = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'NEF'}
 
@@ -29,11 +28,13 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'NEF'}
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
 @login_manager_app.user_loader
 def load_user(id_usuario):
     return ModelUser.get_by_id(db, id_usuario)
 
+@app.route('/uploads/<name>')
+def download_file(name):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], name)
 
 # URL PRINCIPAL
 @app.route('/')
@@ -128,32 +129,40 @@ def Home():
 @login_required
 def perfil():
     if request.method == 'POST':
-        img_filename = ''
-        if 'imagen' in request.files:
-            file = request.files['imagen']
-            if file.filename != '':
-                img_filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+        # check if the post request has the file part
+        if 'imagen' not in request.files:
+            print('No file part')
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['imagen']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            print('No selected part')
+            flash('No selected file')
+            return redirect(request.url)
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
         publi = Publicacion(
             None,
             current_user.id_usuario,
             request.form['titulo'],
             request.form['contenido'],
-            img_filename,
-            datetime.now() # Agregamos la fecha actual
+            filename,
         )
+        print("todo bien")
         try:
             ModelPublicaciones.create_publicacion(db, publi)
+            print("todo bien x2")
             return redirect(url_for('perfil'))
 
         except Exception as ex:
             return str(ex)
 
     else:
-        # publicaciones = Publicacion.query.all()
         publicaciones = ModelPublicaciones.get_publicaciones_usuario(db, current_user.id_usuario)
-        return render_template('perfil/perfil.html', publicaciones=publicaciones)
+        return render_template('perfil/perfil.html',publicaciones=publicaciones)
 
 
 @app.route('/chats')
