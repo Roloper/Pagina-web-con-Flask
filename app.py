@@ -7,44 +7,45 @@ from werkzeug.utils import secure_filename
 import os
 import requests
 
-#Models
+# Models
 from models.ModelUser import ModelUser
 
-#Entities
+# Entities
 from models.entities.Publicacion import Publicacion
 from models.entities.User import User
 
 app = Flask(__name__, template_folder='template')
-csrf=CSRFProtect(app)
+csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
 
 app.config['UPLOAD_FOLDER'] = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'NEF'}
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 
 
 @login_manager_app.user_loader
 def load_user(id_usuario):
     return ModelUser.get_by_id(db, id_usuario)
 
-#URL PRINCIPAL
+
+# URL PRINCIPAL
 @app.route('/')
 def index():
     return render_template('auth/index.html')
 
-#URL PARA EL LOGIN
-@app.route('/login', methods = ['GET','POST']) #persona o empresa
+
+# URL PARA EL LOGIN
+@app.route('/login', methods=['GET', 'POST'])  # persona o empresa
 def login():
     if request.method == 'POST':
         print(request.form['a_username'])
         print(request.form['a_password'])
-        user = User(0,0,request.form['a_username'], request.form['a_password'],0,0,0,0,0)
-        logged_user = ModelUser.login(db,user)
+        user = User(0, 0, request.form['a_username'], request.form['a_password'], 0, 0, 0, 0, 0)
+        logged_user = ModelUser.login(db, user)
 
         if logged_user != None:
             if logged_user.a_password:
@@ -61,7 +62,8 @@ def login():
     else:
         return render_template('auth/login.html')
 
-#URL DEL REGISTRO-
+
+# URL DEL REGISTRO-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -92,35 +94,16 @@ def register():
 
     else:
         return render_template('auth/register.html')
-#Redireccion para el cierre de sesion
+
+
+# Redireccion para el cierre de sesion
 @app.route('/logout')
 def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/crear_publicacion', methods=['GET', 'POST'])
-@login_required
-def crear_publicacion():
-    if request.method == 'POST':
-        titulo = request.form['titulo']
-        contenido = request.form['contenido']
-        imagen = request.files['imagen']
-        filename = secure_filename(imagen.filename)
-        imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        imagen_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        # Asegurarse de que el usuario actual esté autorizado para crear publicaciones
-        if current_user.can_post():
-            publicacion = Publicacion(id_usuario=current_user.id, titulo=titulo, contenido=contenido, imagen_url=imagen_url)
-            db.session.add(publicacion)
-            db.session.commit()
-            flash('Tu publicación ha sido creada!', 'success')
-        else:
-            flash('No estás autorizado para crear publicaciones.', 'danger')
-        return redirect(url_for('index'))
-    return render_template('crear_publicacion.html')
 
-
-@app.route('/buscar', methods=['POST'])
+@app.route('/buscar', methods=['GET','POST'])
 def buscar():
     if request.method == 'POST':
         search_query = request.form['search_query']  # obtener el término de búsqueda
@@ -133,40 +116,59 @@ def buscar():
         return redirect(url_for('Home'))
 
 
-
-#url de home para pagina principal
+# url de home para pagina principal
 @app.route('/Home')
 @login_required
 def Home():
-    return  render_template('auth/home.html')
+    return render_template('auth/home.html')
 
-@app.route('/perfil')
+
+@app.route('/perfil', methods=['GET','POST'])
 @login_required
 def perfil():
-    return  render_template('./perfil/perfil.html')
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        contenido = request.form['contenido']
+        imagen = request.files['imagen']
+        filename = secure_filename(imagen.filename)
+        imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        imagen_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        # Asegurarse de que el usuario actual esté autorizado para crear publicaciones
+        if current_user.can_post():
+            publicacion = Publicacion(id_usuario=current_user.id, titulo=titulo, contenido=contenido,
+                                      imagen_url=imagen_url)
+            db.session.add(publicacion)
+            db.session.commit()
+            flash('Tu publicación ha sido creada!', 'success')
+        else:
+            flash('No estás autorizado para crear publicaciones.', 'danger')
+        return redirect(url_for('./perfil/perfil.html'))
+    return redirect(url_for('perfil'))
 
 
 @app.route('/chats')
 @login_required
 def chats():
-    return  render_template('Chat/chat_room.html')
+    return render_template('Chat/chat_room.html')
+
 
 @app.route('/carrito')
 @login_required
 def carrito():
-
-    return  render_template('carrito/mycart.html')
+    return render_template('carrito/mycart.html')
 
 
 def status_401(error):
     return redirect(url_for('index'))
 
+
 def status_404(error):
     return "<h1> Pagino no encontrada</h1>", 404
+
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
     csrf.init_app(app)
-    app.register_error_handler(401,status_401)
+    app.register_error_handler(401, status_401)
     app.register_error_handler(404, status_404)
     app.run()
