@@ -22,14 +22,25 @@ CREATE TABLE `usuario` (
    PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE publicacion (
+CREATE TABLE amigo (
+    id_amigo INT PRIMARY KEY AUTO_INCREMENT,
+    usuario_id INT,
+    amigo_id INT,
+    fecha_amistad DATE,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (amigo_id) REFERENCES usuario(id_usuario)
+);
+
+CREATE TABLE publicaciones (
   id_publicacion INT NOT NULL AUTO_INCREMENT,
   id_usuario INT NOT NULL,
+  titulo VARCHAR(255) NOT NULL,
   contenido TEXT NOT NULL,
-  fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  imagen LONGBLOB,
+  fecha_publicacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_publicacion),
-  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
-);
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `mycart` (
   `id_cart` int(200) NOT NULL,
