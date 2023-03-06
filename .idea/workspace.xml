@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e78599bc-fb5f-4d5d-8f46-a7f4b30c0a0f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/models/ModelAmigo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/ModelProducto.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/ModelPublicacion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/entities/Amigo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/entities/Producto.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/models/entities/Publicacion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BD/bd_proyecto.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BD/bd_proyecto.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/ModelUser.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/ModelUser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/publicacion.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/publicacion.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +25,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -47,6 +55,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\models" />
       <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\template" />
       <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\static\js" />
       <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\static\css" />

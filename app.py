@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from config import config
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, login_user, logout_user, login_required
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
 import os
 import requests
@@ -11,10 +11,11 @@ import requests
 from models.ModelUser import ModelUser
 
 #Entities
+from models.entities.Publicacion import Publicacion
 from models.entities.User import User
 
 app = Flask(__name__, template_folder='template')
-csrf=CSRFProtect()
+csrf=CSRFProtect(app)
 db = MySQL(app)
 login_manager_app = LoginManager(app)
 
@@ -97,10 +98,27 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-@app.route('/publicar', methods=['GET', 'POST'])
+@app.route('/crear_publicacion', methods=['GET', 'POST'])
 @login_required
-def publicar():
-    return "hola"
+def crear_publicacion():
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        contenido = request.form['contenido']
+        imagen = request.files['imagen']
+        filename = secure_filename(imagen.filename)
+        imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        imagen_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        # Asegurarse de que el usuario actual esté autorizado para crear publicaciones
+        if current_user.can_post():
+            publicacion = Publicacion(id_usuario=current_user.id, titulo=titulo, contenido=contenido, imagen_url=imagen_url)
+            db.session.add(publicacion)
+            db.session.commit()
+            flash('Tu publicación ha sido creada!', 'success')
+        else:
+            flash('No estás autorizado para crear publicaciones.', 'danger')
+        return redirect(url_for('index'))
+    return render_template('crear_publicacion.html')
+
 
 @app.route('/buscar', methods=['POST'])
 def buscar():

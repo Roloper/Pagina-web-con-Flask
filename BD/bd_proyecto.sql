@@ -57,14 +57,16 @@ CREATE TABLE `mycart` (
 --
 
 CREATE TABLE `producto` (
-  `id_producto` int(200) NOT NULL,
+  `id_producto` int(200) NOT NULL PRIMARY KEY,
   `id_usuario` int(200) NOT NULL,
   `p_nombreproducto` varchar(255) NOT NULL,
   `p_categoria` varchar(255) NOT NULL,
   `p_descripcion` varchar(255) NOT NULL,
   `p_precio` float NOT NULL,
-  `p_imagenproducto` varchar(5000)
+  `p_imagenproducto` varchar(5000),
+  FOREIGN KEY (`id_usuario`) REFERENCES `usuario`(`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 DROP TABLE IF EXISTS `messages`;
 

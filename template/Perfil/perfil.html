@@ -1,17 +1,64 @@
-{% extends '/base2.html' %}
+{% extends './base2.html' %}
 
-{% block title %}Perfil{% endblock %}
-{% block customCSS %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}"> 
-<link rel="stylesheet" href="{{url_for('static', filename='css/perfil.css')}}"> 
-{% endblock %}
+{% block title %}Home{% endblock %}
 
 {% block body %}
-<body>
-   <h1>Perfil de Empresa</h1>
-    <h2>Nombre del dueño: {{ current_user.a_name }}</h2>
-    <h2>Nombre de la empresa: {{ current_user.a_username }}</h2>
-    <h2>Nombre del email: {{ current_user.a_email }}</h2>
-</body>
 
+<div class="row">
+    <!-- Agregar el campo CSRF token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+    <div class="col-md-3">
+        <img src="{{ url_for('static', filename='img/' + current_user.a_imagenperfil) }}"
+             alt="{{ current_user.a_username }}'s profile picture" class="img-thumbnail">
+
+        <div class="col-md-9">
+            <h2>Dueño de empresa: {{ current_user.a_name }}</h2>
+            <h2>Nombre de Empresa: {{ current_user.a_username }}</h2>
+            <p>correo de empresa: {{ current_user.a_email }}</p>
+        </div>
+    </div>
+     <div class="col-md-6">
+        <form method="POST" action="{{ url_for('crear_publicacion') }}">
+            <div class="form-group">
+                <input type="text" name="titulo" placeholder="Título" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <textarea name="contenido" placeholder="Escribe algo..." class="form-control" rows="3"
+                          required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" name="imagen" class="form-control-file">
+            </div>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+
+        <hr>
+
+        <h4>Mis publicaciones:</h4>
+        <ul class="list-unstyled">
+            {% for publicacion in publicaciones %}
+            <li class="media">
+                <img src="{{ url_for('static', filename='img/' + publicacion.usuario.a_imagenperfil) }}"
+                     alt="{{ publicacion.usuario.a_username }}'s profile picture" class="mr-3 rounded-circle"
+                     style="width: 64px; height: 64px;">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1">{{ publicacion.titulo }}</h5>
+                    {{ publicacion.contenido }}
+                    {% if publicacion.imagen %}
+                    <br>
+                    <img src="{{ url_for('static', filename='img/' + publicacion.imagen) }}"
+                         alt="Imagen de la publicación"
+                         class="img-fluid">
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-3">
+        <h3>Solicitudes pendientes:</h3>
+
+    </div>
+</div>
 {% endblock %}
