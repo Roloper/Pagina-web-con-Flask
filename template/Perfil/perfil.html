@@ -18,8 +18,10 @@
             <p>correo de empresa: {{ current_user.a_email }}</p>
         </div>
     </div>
-     <div class="col-md-6">
-        <form method="POST" action="{{ url_for('./perfil') }}">
+    <div class="col-md-6">
+        <form method="POST" action="/perfil">
+            <!-- Agregar el campo CSRF token -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
                 <input type="text" name="titulo" placeholder="Título" class="form-control" required>
             </div>
@@ -39,8 +41,8 @@
         <ul class="list-unstyled">
             {% for publicacion in publicaciones %}
             <li class="media">
-                <img src="{{ url_for('static', filename='img/' + publicacion.usuario.a_imagenperfil) }}"
-                     alt="{{ publicacion.usuario.a_username }}'s profile picture" class="mr-3 rounded-circle"
+                <img src="{{ url_for('static', filename='img/' + publicacion.id_usuario.a_imagenperfil) }}"
+                     alt="{{ publicacion.id.usuario.a_username }}'s profile picture" class="mr-3 rounded-circle"
                      style="width: 64px; height: 64px;">
                 <div class="media-body">
                     <h5 class="mt-0 mb-1">{{ publicacion.titulo }}</h5>

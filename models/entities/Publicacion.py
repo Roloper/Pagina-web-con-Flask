@@ -1,6 +1,3 @@
-
-
-
 class Publicacion():
     def __init__(self, id_publicacion, id_usuario, titulo, contenido, imagen, fecha_publicacion):
         self.id_publicacion = id_publicacion
@@ -12,3 +9,4 @@ class Publicacion():
 
     def get_id(self):
         return self.id_publicacion
+

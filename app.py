@@ -4,10 +4,13 @@ from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.utils import secure_filename
+from datetime import datetime
 import os
 import requests
 
 # Models
+from models import ModelPublicacion
+from models.ModelPublicacion import ModelPublicaciones
 from models.ModelUser import ModelUser
 
 # Entities
@@ -42,10 +45,8 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])  # persona o empresa
 def login():
     if request.method == 'POST':
-        print(request.form['a_username'])
-        print(request.form['a_password'])
         user = User(0, 0, request.form['a_username'], request.form['a_password'], 0, 0, 0, 0, 0)
-        logged_user = ModelUser.login(db, user)
+        logged_user = ModelUser.login(db,user)
 
         if logged_user != None:
             if logged_user.a_password:
@@ -127,23 +128,32 @@ def Home():
 @login_required
 def perfil():
     if request.method == 'POST':
-        titulo = request.form['titulo']
-        contenido = request.form['contenido']
-        imagen = request.files['imagen']
-        filename = secure_filename(imagen.filename)
-        imagen.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        imagen_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-        # Asegurarse de que el usuario actual esté autorizado para crear publicaciones
-        if current_user.can_post():
-            publicacion = Publicacion(id_usuario=current_user.id, titulo=titulo, contenido=contenido,
-                                      imagen_url=imagen_url)
-            db.session.add(publicacion)
-            db.session.commit()
-            flash('Tu publicación ha sido creada!', 'success')
-        else:
-            flash('No estás autorizado para crear publicaciones.', 'danger')
-        return redirect(url_for('./perfil/perfil.html'))
-    return redirect(url_for('perfil'))
+        img_filename = ''
+        if 'imagen' in request.files:
+            file = request.files['imagen']
+            if file.filename != '':
+                img_filename = secure_filename(file.filename)
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], img_filename))
+
+        publi = Publicacion(
+            None,
+            current_user.id_usuario,
+            request.form['titulo'],
+            request.form['contenido'],
+            img_filename,
+            datetime.now() # Agregamos la fecha actual
+        )
+        try:
+            ModelPublicaciones.create_publicacion(db, publi)
+            return redirect(url_for('perfil'))
+
+        except Exception as ex:
+            return str(ex)
+
+    else:
+        # publicaciones = Publicacion.query.all()
+        publicaciones = ModelPublicaciones.get_publicaciones_usuario(db, current_user.id_usuario)
+        return render_template('perfil/perfil.html', publicaciones=publicaciones)
 
 
 @app.route('/chats')
