@@ -1,12 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 5.0.2
--- https://www.phpmyadmin.net/
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 02-03-2023 a las 09:50:44
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.4.7
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "-05:00";
@@ -16,16 +7,29 @@ SET time_zone = "-05:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Base de datos: `bd_proyecto`
--- Estructura de tabla para la tabla `empresa`
+CREATE TABLE `usuario` (
+  `id_usuario` int(200) NOT NULL AUTO_INCREMENT,
+  `a_name` varchar(255) NOT NULL,
+  `a_username` varchar(255) NOT NULL,
+  `a_password` varchar(255) NOT NULL,
+  `a_email` varchar(255) NOT NULL,
+  `a_descripcion` varchar(255) NOT NULL,
+  `a_celular` varchar(20) NOT NULL,
+  `a_ubicacion` varchar(255) NOT NULL,
+  `a_imagenperfil` varchar(5000),
+  `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `online` varchar(1) NOT NULL DEFAULT '0',
+   PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `mycart`
---
+CREATE TABLE publicacion (
+  id_publicacion INT NOT NULL AUTO_INCREMENT,
+  id_usuario INT NOT NULL,
+  contenido TEXT NOT NULL,
+  fecha_creacion DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id_publicacion),
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE
+);
 
 CREATE TABLE `mycart` (
   `id_cart` int(200) NOT NULL,
@@ -51,33 +55,6 @@ CREATE TABLE `producto` (
   `p_imagenproducto` varchar(5000)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuario`
---
-
-CREATE TABLE `usuario` (
-  `id_usuario` int(200) NOT NULL AUTO_INCREMENT,
-  `a_name` varchar(255) NOT NULL,
-  `a_username` varchar(255) NOT NULL,
-  `a_password` varchar(255) NOT NULL,
-  `a_email` varchar(255) NOT NULL,
-  `a_descripcion` varchar(255) NOT NULL,
-  `a_celular` varchar(20) NOT NULL,
-  `a_ubicacion` varchar(255) NOT NULL,
-  `a_imagenperfil` varchar(5000),
-  `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `online` varchar(1) NOT NULL DEFAULT '0',
-   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- agregar estos campos a usuario
---`reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, 
---`online` varchar(1) NOT NULL DEFAULT '0', 0 o 1 para marcar si el usuario esta conectado
---
-
--- crear tabla para los mensajes
 DROP TABLE IF EXISTS `messages`;
 
 CREATE TABLE IF NOT EXISTS `messages` (

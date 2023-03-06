@@ -1,0 +1,14 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>Publicar</h1>
+        <form method="POST" action="{{ url_for('publicar') }}">
+            <div class="form-group">
+                <label for="contenido">Contenido:</label>
+                <textarea class="form-control" id="contenido" name="contenido" rows="3"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+    </div>
+{% endblock %}

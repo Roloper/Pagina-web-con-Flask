@@ -97,6 +97,11 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.route('/publicar', methods=['GET', 'POST'])
+@login_required
+def publicar():
+    return "hola"
+
 @app.route('/buscar', methods=['POST'])
 def buscar():
     if request.method == 'POST':
@@ -118,17 +123,20 @@ def Home():
     return  render_template('auth/home.html')
 
 @app.route('/perfil')
+@login_required
 def perfil():
     return  render_template('./perfil/perfil.html')
 
 
 @app.route('/chats')
+@login_required
 def chats():
     return  render_template('Chat/chat_room.html')
 
 @app.route('/carrito')
 @login_required
 def carrito():
+
     return  render_template('carrito/mycart.html')
 
 

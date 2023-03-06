@@ -50,3 +50,6 @@ class ModelUser():
         except Exception as ex:
             db.connection.rollback()
             raise Exception(ex)
+
+
+class Publicaciones():
