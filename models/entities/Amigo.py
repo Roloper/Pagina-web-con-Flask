@@ -9,5 +9,5 @@ class Amigo():
         self.fecha_amistad = fecha_amistad
 
     def get_id(self):
-        return self.id_usuario
+        return self.id_amigo
 

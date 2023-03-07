@@ -22,14 +22,16 @@ CREATE TABLE `usuario` (
    PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE amigo (
-    id_amigo INT PRIMARY KEY AUTO_INCREMENT,
-    usuario_id INT,
-    amigo_id INT,
-    fecha_amistad DATE,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (amigo_id) REFERENCES usuario(id_usuario)
-);
+CREATE TABLE user_connections (
+  id INT NOT NULL AUTO_INCREMENT,
+  user_id INT NOT NULL,
+  connection_id INT NOT NULL,
+  status ENUM('pendiente', 'aceptada') NOT NULL DEFAULT 'pendiente',
+  PRIMARY KEY (id),
+  INDEX user_connection_idx (user_id, connection_id),
+  CONSTRAINT fk_user_connections_user_id FOREIGN KEY (user_id) REFERENCES users (id),
+  CONSTRAINT fk_user_connections_connection_id FOREIGN KEY (connection_id) REFERENCES users (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE publicaciones (
   id_publicacion INT NOT NULL AUTO_INCREMENT,

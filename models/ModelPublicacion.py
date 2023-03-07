@@ -1,3 +1,4 @@
+from .ModelUser import ModelUser
 from .entities.Publicacion import Publicacion
 
 
@@ -30,3 +31,18 @@ class ModelPublicaciones():
             return publicaciones
         except Exception as ex:
             raise Exception(ex)
+
+    @staticmethod
+    def get_publicaciones_amigos(db, id_usuario):
+        # Obtener todos los amigos del usuario
+        amigos = ModelUser.get_amigos(db, id_usuario)
+
+        if not amigos:
+            return []
+
+        # Obtener todas las publicaciones de los amigos del usuario
+        publicaciones_amigos = []
+        for amigo in amigos:
+            publicaciones_amigos += ModelPublicaciones.get_publicaciones_usuario(db, amigo.id_amigo)
+
+        return publicaciones_amigos

@@ -2,6 +2,10 @@
 
 {% block title %}Home{% endblock %}
 
+{% block customCSS %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block body %}
 
 <div class="row">
@@ -10,13 +14,60 @@
              alt="{{ current_user.a_username }}'s profile picture" class="img-thumbnail">
     </div>
     <div class="col-md-6">
-        <!-- Aquí va una opcion para crear publicacion, toma de ejemplo la de facebook pero mas simple -->
-        <!-- Aquí van las publicaciones del usuario -->
+        <!-- Formulario para crear una publicación -->
+        <form method="POST" action="/perfil" enctype="multipart/form-data">
+            <!-- Agregar el campo CSRF token -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <input type="text" name="titulo" placeholder="Título" class="form-control" required>
+            </div>
+            <div class="form-group">
+        <textarea name="contenido" placeholder="Escribe algo..." class="form-control" rows="3"
+                  required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-control-file" id="inputImg" name="imagen" accept="image/png"
+                       placeholder="imagen">
+            </div>
+            <button type="submit" class="btn btn-primary">Publicar</button>
+        </form>
+        <hr>
 
+        <!-- Aquí van las publicaciones de mis amigos -->
+        {% for publicacion_amigo in publicaciones_amigos %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ publicacion_amigo.titulo }}</h5>
+                <p class="card-text">{{ publicacion.contenido}}</p>
+                {% if publicacion.imagen %}
+                <br>
+                <img src="{{ url_for('static', filename='img/' + publicacion_amigo.imagen) }}"
+                     alt="Imagen de la publicación"
+                     class="img-fluid">
+                {% endif %}
+            </div>
+
+        </div>
+        {% endfor %}
     </div>
     <div class="col-md-3">
         <h3>Amigos sugeridos:</h3>
+        <!-- Aqui van los amigos sujeridos-->
+        {% for sugerido in sugeridos %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ sugerido.a_username }}</h5>
+                <p class="card-text">{{ sugerido.a_email }}</p>
+                <form method="POST" action="{{ url_for('connect', user_id = sugerido.id_usuario) }}">
+                    <!-- Agregar el campo CSRF token -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-primary">Agregar amigo</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
 
     </div>
 </div>
+
 {% endblock %}

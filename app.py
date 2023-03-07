@@ -128,7 +128,71 @@ def buscar():
 @app.route('/Home')
 @login_required
 def Home():
-    return render_template('auth/home.html')
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'imagen' not in request.files:
+            print('No file part')
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['imagen']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            print('No selected part')
+            flash('No selected file')
+            return redirect(request.url)
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        publi = Publicacion(
+            None,
+            current_user.id_usuario,
+            request.form['titulo'],
+            request.form['contenido'],
+            filename,
+        )
+        print("todo bien")
+        try:
+            ModelPublicaciones.create_publicacion(db, publi)
+            print("todo bien x2")
+            return redirect(url_for('home'))
+
+        except Exception as ex:
+            return str(ex)
+
+    else:
+        sugeridos = ModelUser.get_no_amigos(db, current_user.id_usuario)
+        publicaciones_amigos = ModelPublicaciones.get_publicaciones_amigos(db, current_user.id_usuario)
+        return render_template('auth/home.html', sugeridos=sugeridos, publicaciones_amigos=publicaciones_amigos)
+
+
+
+
+@app.route('/connect/<int:user_id>', methods=['POST'])
+@login_required
+def connect(user_id):
+    # Enviar solicitud de conexión
+    ModelUser.enviar_solicitud(current_user.id, user_id)
+    flash('Se ha enviado una solicitud de conexión al usuario.')
+    return redirect(url_for('Home'))
+
+
+@app.route('/accept/<int:request_id>', methods=['POST'])
+@login_required
+def accept(request_id):
+    # Aceptar solicitud de conexión
+    ModelUser.aceptar_solicitud(request_id)
+    flash('Se ha aceptado la solicitud de conexión.')
+    return redirect(url_for('Home'))
+
+
+@app.route('/reject/<int:request_id>', methods=['POST'])
+@login_required
+def reject(request_id):
+    # Rechazar solicitud de conexión
+    ModelUser.rechazar_solicitud(request_id)
+    flash('Se ha rechazado la solicitud de conexión.')
+    return redirect(url_for('Home'))
 
 
 @app.route('/perfil', methods=['GET','POST'])
@@ -167,8 +231,9 @@ def perfil():
             return str(ex)
 
     else:
+        solicitudes = ModelUser.get_solicitudes(db, current_user.id_usuario)
         publicaciones = ModelPublicaciones.get_publicaciones_usuario(db, current_user.id_usuario)
-        return render_template('perfil/perfil.html',publicaciones=publicaciones)
+        return render_template('perfil/perfil.html',publicaciones=publicaciones, solicitudes = solicitudes)
 
 
 @app.route('/chats')

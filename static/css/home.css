@@ -1,0 +1,19 @@
+/* Estilo para la imagen de perfil */
+.img-thumbnail {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}
+
+/* Estilo para las publicaciones */
+.card {
+    margin-bottom: 1rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+}
+
+.card-footer {
+    font-size: 0.8rem;
+}
