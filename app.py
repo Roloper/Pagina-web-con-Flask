@@ -10,10 +10,12 @@ import requests
 
 # Models
 from models import ModelPublicacion
+from models.ModelProducto import ModelProducto
 from models.ModelPublicacion import ModelPublicaciones
 from models.ModelUser import ModelUser
 
 # Entities
+from models.entities.Producto import Producto
 from models.entities.Publicacion import Publicacion
 from models.entities.User import User
 
@@ -178,6 +180,45 @@ def chats():
 @app.route('/carrito')
 @login_required
 def carrito():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'imagen' not in request.files:
+            print('No file part')
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['imagen']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            print('No selected part')
+            flash('No selected file')
+            return redirect(request.url)
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+        produc = Producto(
+            #modificar
+            None,
+            current_user.id_usuario,
+            request.form['titulo'],
+            request.form['contenido'],
+            filename,
+        )
+        print("todo bien")
+        try:
+            ModelProducto.create_producto(db, produc)
+            print("todo bien x2")
+            return redirect(url_for('perfil'))
+
+        except Exception as ex:
+            return str(ex)
+
+    else:
+        #productos = ModelProducto.get(db, current_user.id_usuario)
+        return render_template('carrito/mycart.html')#,publicaciones=publicaciones)
+
+
+
     return render_template('carrito/mycart.html')
 
 
