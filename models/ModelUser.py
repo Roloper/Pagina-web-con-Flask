@@ -59,13 +59,15 @@ class ModelUser():
     def enviar_solicitud(cls, db, user_id, connection_id):
         try:
             cursor = db.connection.cursor()
-
+            print("bienn 1")
             # Verificar si ya existe una solicitud de conexión pendiente o aceptada entre los usuarios
             sql = """SELECT COUNT(*) FROM user_connections
                      WHERE (user_id = %s AND connection_id = %s)
                      OR (user_id = %s AND connection_id = %s)
                      AND status != 'rechazada'"""
+            print("bienn 2")
             cursor.execute(sql, (user_id, connection_id, connection_id, user_id))
+            print("bienn 3")
             count = cursor.fetchone()[0]  # lo asigna a la primera columna
 
             if count == 0:

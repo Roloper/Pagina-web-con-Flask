@@ -172,7 +172,7 @@ def Home():
 @login_required
 def connect(user_id):
     # Enviar solicitud de conexión
-    ModelUser.enviar_solicitud(current_user.id, user_id)
+    ModelUser.enviar_solicitud(db,current_user.id_usuario, user_id)
     flash('Se ha enviado una solicitud de conexión al usuario.')
     return redirect(url_for('Home'))
 
@@ -181,7 +181,7 @@ def connect(user_id):
 @login_required
 def accept(request_id):
     # Aceptar solicitud de conexión
-    ModelUser.aceptar_solicitud(request_id)
+    ModelUser.aceptar_solicitud(db,request_id)
     flash('Se ha aceptado la solicitud de conexión.')
     return redirect(url_for('Home'))
 
@@ -282,9 +282,6 @@ def carrito():
         #productos = ModelProducto.get(db, current_user.id_usuario)
         return render_template('carrito/mycart.html')#,publicaciones=publicaciones)
 
-
-
-    return render_template('carrito/mycart.html')
 
 
 def status_401(error):
