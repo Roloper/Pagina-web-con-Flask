@@ -163,7 +163,8 @@ def Home():
     else:
         sugeridos = ModelUser.get_no_amigos(db, current_user.id_usuario)
         publicaciones_amigos = ModelPublicaciones.get_publicaciones_amigos(db, current_user.id_usuario)
-        return render_template('auth/home.html', sugeridos=sugeridos, publicaciones_amigos=publicaciones_amigos)
+        all = ModelUser.get_all_users(db)
+        return render_template('auth/home.html', sugeridos=sugeridos, publicaciones_amigos=publicaciones_amigos, all = all)
 
 
 
@@ -231,7 +232,8 @@ def perfil():
             return str(ex)
 
     else:
-        solicitudes = ModelUser.get_solicitudes(db, current_user.id_usuario)
+        solicitudes_conex = ModelUser.get_solicitudes(db, current_user.id_usuario)
+        solicitudes = ModelUser.get_solicitud_usu(db,solicitudes_conex)
         publicaciones = ModelPublicaciones.get_publicaciones_usuario(db, current_user.id_usuario)
         return render_template('perfil/perfil.html',publicaciones=publicaciones, solicitudes = solicitudes)
 

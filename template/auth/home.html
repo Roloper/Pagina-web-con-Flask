@@ -34,20 +34,24 @@
         <hr>
 
         <!-- Aquí van las publicaciones de mis amigos -->
-        {% for publicacion_amigo in publicaciones_amigos %}
+        {% for publi in publicaciones_amigos %}
         <div class="card mb-3">
             <div class="card-body">
-
-                <h5 class="card-title">{{ publicacion_amigo.titulo }}</h5>
-                <p class="card-text">{{ publicacion.contenido}}</p>
-                {% if publicacion.imagen %}
+                {% if publi.imagen %}
                 <br>
-                <img src="{{ url_for('static', filename='img/' + publicacion_amigo.imagen) }}"
+                <img src="{{ url_for('static', filename='img/' + publi.imagen) }}"
                      alt="Imagen de la publicación"
                      class="img-fluid">
                 {% endif %}
-            </div>
+                <h5 class="card-title">{{ publi.titulo }}</h5>
+                <p class="card-text">{{ publi.contenido}}</p>
+                {% for al in all %}
+                {% if al.id_usuario == publi.id_usuario %}
+                <p class="card-text">Publicado por {{ al.a_username}}</p>
+                {% endif %}
+                {% endfor %}
 
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -57,12 +61,7 @@
         {% for sugerido in sugeridos %}
         <div class="card mb-3">
             <div class="card-body">
-                {% if sugerido.a_imagenperfil %}
-                <br>
-                <img src="{{ url_for('static', filename='img/' + sugerido.a_imagenperfil) }}"
-                     alt="Imagen de la publicación"
-                     class="img-fluid">
-                {% endif %}
+
                 <h5 class="card-title">{{ sugerido.a_username }}</h5>
                 <p class="card-text">{{ sugerido.a_email }}</p>
                 <form method="POST" action="{{ url_for('connect', user_id = sugerido.id_usuario) }}">

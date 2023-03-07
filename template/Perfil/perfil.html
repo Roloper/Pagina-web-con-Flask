@@ -58,6 +58,20 @@
     </div>
     <div class="col-md-3">
         <h3>Solicitudes pendientes:</h3>
+        <!-- Aqui van los amigos sujeridos-->
+        {% for solicitud in solicitudes %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ solicitud.username }}</h5>
+                <p class="card-text">{{ solicitud.location }}</p>
+                <form method="POST" action="{{ url_for('accept', request_id = solicitud.id) }}">
+                    <!-- Agregar el campo CSRF token -->
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
 
     </div>
 </div>

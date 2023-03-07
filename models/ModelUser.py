@@ -73,7 +73,7 @@ class ModelUser():
             if count == 0:
                 # Agregar una nueva solicitud de conexión pendiente
                 sql = "INSERT INTO user_connections (user_id, connection_id, status) VALUES (%s, %s, 'pendiente')"
-                cursor.execute(sql, (user_id, connection_id))
+                cursor.execute(sql, (connection_id,user_id))
                 db.connection.commit()
                 return True
             else:
@@ -91,8 +91,9 @@ class ModelUser():
             # Obtener todas las solicitudes de conexión pendientes del usuario
             sql = """SELECT user_connections.id, usuario.a_name, usuario.a_username, usuario.a_ubicacion, usuario.a_imagenperfil
                          FROM user_connections
-                         JOIN usuario ON user_connections.user_id = usuario.id_usuario
-                         WHERE connection_id = %s AND status = 'pendiente'"""
+                         JOIN usuario 
+                         ON user_connections.connection_id = usuario.id_usuario
+                         WHERE user_id = %s AND status = 'pendiente'"""
             cursor.execute(sql, (user_id,))
             rows = cursor.fetchall()
             requests = []
@@ -109,13 +110,44 @@ class ModelUser():
             raise Exception(ex)
 
     @classmethod
-    def aceptar_solicitud(cls, db, request_id):
+    def get_solicitud_usu(cls, db, requests_list):
         try:
             cursor = db.connection.cursor()
 
+            # Obtener información de los usuarios que mandaron solicitudes
+            user_ids = [request['id'] for request in requests_list]
+            if not user_ids:
+                return []
+
+            sql = """SELECT id_usuario, a_name, a_username, a_ubicacion, a_imagenperfil
+                             FROM usuario
+                             WHERE id_usuario IN ({})"""
+            user_ids_string = ', '.join(str(user_id) for user_id in user_ids)
+            cursor.execute(sql.format(user_ids_string))
+            rows = cursor.fetchall()
+            users = []
+            for row in rows:
+                users.append({
+                    'id': row[0],
+                    'name': row[1],
+                    'username': row[2],
+                    'location': row[3],
+                    'profile_image': row[4]
+                })
+            return users
+        except Exception as ex:
+            raise Exception(ex)
+
+    @classmethod
+    def aceptar_solicitud(cls, db, request_id):
+        try:
+            cursor = db.connection.cursor()
+            print("jijijaaa")
             # Cambiar el estado de la solicitud de conexión a aceptada
             sql = "UPDATE user_connections SET status = 'aceptada' WHERE id = %s"
+            print("jijijaaa")
             cursor.execute(sql, (request_id,))
+            print("jijijaaa")
             db.connection.commit()
             return True
         except Exception as ex:
@@ -163,7 +195,10 @@ class ModelUser():
                     amigo[2],
                     amigo[3],
                     amigo[4],
-                    amigo[5]
+                    amigo[5],
+                    amigo[6],
+                    amigo[7],
+                    amigo[8]
                 )
                 amigos_list.append(amigo_obj)
 
@@ -219,3 +254,29 @@ class ModelUser():
             print("get_no_amigo")
             print(str(ex))
             return []
+
+    @classmethod
+    def get_all_users(cls, db):
+        try:
+            cursor = db.connection.cursor()
+
+            sql = """SELECT id_usuario, a_name, a_username, 
+                    a_email, a_descripcion, a_celular, a_ubicacion, a_imagenperfil 
+                     FROM usuario """
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            users = []
+            for row in rows:
+                users.append({
+                    'id_usuario': row[0],
+                    'a_name': row[1],
+                    'a_username': row[2],
+                    'a_email': row[3],
+                    'a_descripcion': row[4],
+                    'a_celular': row[5],
+                    'a_ubicacion': row[6],
+                    'a_imagenperfil': row[7]
+                })
+            return users
+        except Exception as ex:
+            raise Exception(ex)

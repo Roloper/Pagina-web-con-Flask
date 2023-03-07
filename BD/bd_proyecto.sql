@@ -29,8 +29,8 @@ CREATE TABLE user_connections (
   status ENUM('pendiente', 'aceptada') NOT NULL DEFAULT 'pendiente',
   PRIMARY KEY (id),
   INDEX user_connection_idx (user_id, connection_id),
-  CONSTRAINT fk_user_connections_user_id FOREIGN KEY (user_id) REFERENCES users (id),
-  CONSTRAINT fk_user_connections_connection_id FOREIGN KEY (connection_id) REFERENCES users (id)
+  CONSTRAINT fk_user_connections_user_id FOREIGN KEY (user_id) REFERENCES usuario (id_usuario),
+  CONSTRAINT fk_user_connections_connection_id FOREIGN KEY (connection_id) REFERENCES usuario (id_usuario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 CREATE TABLE publicaciones (

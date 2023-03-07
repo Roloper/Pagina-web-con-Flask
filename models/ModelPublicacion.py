@@ -43,6 +43,6 @@ class ModelPublicaciones():
         # Obtener todas las publicaciones de los amigos del usuario
         publicaciones_amigos = []
         for amigo in amigos:
-            publicaciones_amigos += ModelPublicaciones.get_publicaciones_usuario(db, amigo.id_amigo)
+            publicaciones_amigos += ModelPublicaciones.get_publicaciones_usuario(db, amigo.id_usuario)
 
         return publicaciones_amigos
