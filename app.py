@@ -41,6 +41,10 @@ def download_file(name):
 def index():
     return render_template('auth/index.html')
 
+@app.route('/mision')
+def mision():
+    return render_template('auth/mision.html')
+
 
 # URL PARA EL LOGIN
 @app.route('/login', methods=['GET', 'POST'])  # persona o empresa
@@ -182,7 +186,7 @@ def status_401(error):
 
 
 def status_404(error):
-    return "<h1> Pagino no encontrada</h1>", 404
+    return "<h1> Pagino no encontrada </h1>", 404
 
 
 if __name__ == '__main__':
