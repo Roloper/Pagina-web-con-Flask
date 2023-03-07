@@ -232,8 +232,8 @@ def perfil():
             return str(ex)
 
     else:
-        solicitudes_conex = ModelUser.get_solicitudes(db, current_user.id_usuario)
-        solicitudes = ModelUser.get_solicitud_usu(db,solicitudes_conex)
+
+        solicitudes = ModelUser.get_solicitudes(db, current_user.id_usuario)
         publicaciones = ModelPublicaciones.get_publicaciones_usuario(db, current_user.id_usuario)
         return render_template('perfil/perfil.html',publicaciones=publicaciones, solicitudes = solicitudes)
 

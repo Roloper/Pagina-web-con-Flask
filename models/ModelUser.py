@@ -25,7 +25,6 @@ class ModelUser():
     def get_by_id(self, db, id_usuario):
         try:
             cursor = db.connection.cursor()
-            print("Sigo vivo")
             sql = """SELECT id_usuario, a_name, a_username, a_email,
                     a_descripcion, a_celular, a_ubicacion, a_imagenperfil 
                      FROM usuario where id_usuario = '{}' """.format(id_usuario)
@@ -59,21 +58,20 @@ class ModelUser():
     def enviar_solicitud(cls, db, user_id, connection_id):
         try:
             cursor = db.connection.cursor()
-            print("bienn 1")
             # Verificar si ya existe una solicitud de conexión pendiente o aceptada entre los usuarios
             sql = """SELECT COUNT(*) FROM user_connections
                      WHERE (user_id = %s AND connection_id = %s)
                      OR (user_id = %s AND connection_id = %s)
                      AND status != 'rechazada'"""
-            print("bienn 2")
+
             cursor.execute(sql, (user_id, connection_id, connection_id, user_id))
-            print("bienn 3")
+
             count = cursor.fetchone()[0]  # lo asigna a la primera columna
 
             if count == 0:
                 # Agregar una nueva solicitud de conexión pendiente
                 sql = "INSERT INTO user_connections (user_id, connection_id, status) VALUES (%s, %s, 'pendiente')"
-                cursor.execute(sql, (connection_id,user_id))
+                cursor.execute(sql, (user_id,connection_id))
                 db.connection.commit()
                 return True
             else:
@@ -89,21 +87,22 @@ class ModelUser():
             cursor = db.connection.cursor()
 
             # Obtener todas las solicitudes de conexión pendientes del usuario
-            sql = """SELECT user_connections.id, usuario.a_name, usuario.a_username, usuario.a_ubicacion, usuario.a_imagenperfil
-                         FROM user_connections
-                         JOIN usuario 
-                         ON user_connections.connection_id = usuario.id_usuario
-                         WHERE user_id = %s AND status = 'pendiente'"""
+            sql = """SELECT user_connections.id, usuario.id_usuario, usuario.a_name, usuario.a_username, usuario.a_ubicacion, usuario.a_imagenperfil
+                                 FROM user_connections
+                                 JOIN usuario 
+                                 ON user_connections.user_id = usuario.id_usuario
+                                 WHERE connection_id = %s AND status = 'pendiente'"""
             cursor.execute(sql, (user_id,))
             rows = cursor.fetchall()
             requests = []
             for row in rows:
                 requests.append({
                     'id': row[0],
-                    'name': row[1],
-                    'username': row[2],
-                    'location': row[3],
-                    'profile_image': row[4]
+                    'id_usuario': row[1],
+                    'name': row[2],
+                    'username': row[3],
+                    'location': row[4],
+                    'profile_image': row[5]
                 })
             return requests
         except Exception as ex:
@@ -116,23 +115,26 @@ class ModelUser():
 
             # Obtener información de los usuarios que mandaron solicitudes
             user_ids = [request['id'] for request in requests_list]
+            print()
             if not user_ids:
                 return []
 
-            sql = """SELECT id_usuario, a_name, a_username, a_ubicacion, a_imagenperfil
-                             FROM usuario
-                             WHERE id_usuario IN ({})"""
+            sql = """SELECT uc.id, u.id_usuario, u.a_name, u.a_username, u.a_ubicacion, u.a_imagenperfil
+                     FROM user_connections uc
+                     INNER JOIN usuario u ON u.id_usuario = uc.user_id
+                     WHERE uc.connection_id = %s AND uc.status = 'pendiente'"""
             user_ids_string = ', '.join(str(user_id) for user_id in user_ids)
-            cursor.execute(sql.format(user_ids_string))
+            cursor.execute(sql, (user_ids_string,))
             rows = cursor.fetchall()
             users = []
             for row in rows:
                 users.append({
-                    'id': row[0],
-                    'name': row[1],
-                    'username': row[2],
-                    'location': row[3],
-                    'profile_image': row[4]
+                    'id_usuario': row[1],  # Usar el alias "id_usuario"
+                    'id_connection': row[0],  # Usar el nombre "id_connection"
+                    'name': row[2],
+                    'username': row[3],
+                    'location': row[4],
+                    'profile_image': row[5]
                 })
             return users
         except Exception as ex:
@@ -225,15 +227,15 @@ class ModelUser():
                         UNION SELECT connection_id FROM user_connections 
                             WHERE user_id = %s AND status = 'aceptada') 
                         AND id_usuario != %s"""
-            print("bien 1")
+
             cursor.execute(sql, (id_usuario, id_usuario, id_usuario))
-            print("bien 2")
+
             no_amigos = cursor.fetchall()
-            print("bien 3")
+
 
             # Convertimos los resultados en una lista de objetos Usuario
             no_amigos_list = []
-            print("bien 4")
+
             for no_amigo in no_amigos:
                 no_amigo_obj = User(
                     no_amigo[0],
@@ -247,11 +249,10 @@ class ModelUser():
                     no_amigo[8]
                 )
                 no_amigos_list.append(no_amigo_obj)
-                print("bien 5")
+
             return no_amigos_list
 
         except Exception as ex:
-            print("get_no_amigo")
             print(str(ex))
             return []
 

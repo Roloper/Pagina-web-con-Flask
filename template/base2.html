@@ -16,6 +16,8 @@
           crossorigin="anonymous">
     <!-- Custom css -->
     {% block customCSS %}
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     {% endblock %}
 </head>
 

@@ -8,17 +8,20 @@
     <!-- Agregar el campo CSRF token -->
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-    <div class="col-md-3">
+    <div class="col-md-3 flex-column align-items-center">
         <img src="{{ url_for('static', filename='img/' + current_user.a_imagenperfil) }}"
              alt="{{ current_user.a_username }}'s profile picture" class="img-thumbnail">
 
         <div class="col-md-9">
-            <h2>Dueño de empresa: {{ current_user.a_name }}</h2>
-            <h2>Nombre de Empresa: {{ current_user.a_username }}</h2>
-            <p>correo de empresa: {{ current_user.a_email }}</p>
+            <p>Dueño de empresa:</p>
+            <p><b>{{ current_user.a_name }}</b></p>
+            <p>Nombre de Empresa:</p>
+            <p><b>{{ current_user.a_username }}</b></p>
+            <p>correo de empresa:</p>
+            <p><b>{{ current_user.a_email }}</b></p>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 flex-column align-items-center">
         <form method="POST" action="/perfil" enctype="multipart/form-data">
             <!-- Agregar el campo CSRF token -->
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
@@ -33,7 +36,7 @@
                 <input type="file" class="form-control-file" id="inputImg" name="imagen" accept="image/png"
                        placeholder="imagen">
             </div>
-            <button type="submit" class="btn btn-primary">Publicar</button>
+            <button type="submit" class="btn btn-success btn-block">Publicar</button>
         </form>
 
         <hr>
@@ -56,18 +59,17 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 flex-column align-items-center">
         <h3>Solicitudes pendientes:</h3>
-        <!-- Aqui van los amigos sujeridos-->
-        {% for solicitud in solicitudes %}
+        {% for soli in solicitudes %}
         <div class="card mb-3">
             <div class="card-body">
-                <h5 class="card-title">{{ solicitud.username }}</h5>
-                <p class="card-text">{{ solicitud.location }}</p>
-                <form method="POST" action="{{ url_for('accept', request_id = solicitud.id) }}">
+                <h5 class="card-title">{{ soli.username }}</h5>
+                <p class="card-text">{{ soli.location }}</p>
+                <form method="POST" action="{{ url_for('accept', request_id = soli.id) }}">
                     <!-- Agregar el campo CSRF token -->
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="submit" class="btn btn-success">Agregar amigo</button>
                 </form>
             </div>
         </div>

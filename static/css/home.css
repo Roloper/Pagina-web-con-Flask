@@ -1,8 +1,39 @@
 /* Estilo para la imagen de perfil */
 .img-thumbnail {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid green;
+    border-radius: 15px;
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+body {
+  align-items: center;
+  background-image: url("../img/fondo-home.jpg");
+  background-size: cover;
+  height: 100%;
+}
+.col-md-3 {
+    display: flex;
+    justify-content: center;
+    border: 1px solid green;
+    height: 100%;
+    min-height: 100%;
+    background-color: rgba(169, 169, 169, 0.8);
+    color: black;
+}
+.col-md-6 {
+    background-color: rgba(169, 169, 169, 0.5);
+    border: 1px solid green;
+    height: 100%;
+    min-height: 100%;
+}
+
+.form-control-file {
+  background-color: rgba(169, 169, 169, 0.5);
 }
 
 /* Estilo para las publicaciones */
