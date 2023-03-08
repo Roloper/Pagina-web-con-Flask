@@ -1,3 +1,14 @@
+--Integrantes
+---Alvarado Flores Sebastian Paulo 		20200149
+---Alvarez Mamani Javier Arturo 		20200236
+---Barral Larios Luis Elias 			20200036
+---Campos Acosta Marx Dalesxandro 		20200163
+---Carranza Dávila Williams 			18200137
+---Chávez Domínguez Josseph del Piero 	20200099
+---Figueroa Munive Sebastian Estefano 		19200221
+---Perez Olaguivel Rolando German 		20200197
+
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "-05:00";
@@ -39,11 +50,11 @@ CREATE TABLE publicaciones (
   titulo VARCHAR(255) NOT NULL,
   contenido TEXT NOT NULL,
   imagen VARCHAR(255),
-  fecha_publicacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id_publicacion),
   FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--No implementada
 CREATE TABLE `mycart` (
   `id_cart` int(200) NOT NULL,
   `id_usuario_comprador` int(200) NOT NULL,
@@ -52,12 +63,7 @@ CREATE TABLE `mycart` (
   `c_fecha` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `producto`
---
-
+--No implementada
 CREATE TABLE `producto` (
   `id_producto` int(200) NOT NULL PRIMARY KEY,
   `id_usuario` int(200) NOT NULL,
@@ -70,8 +76,7 @@ CREATE TABLE `producto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-DROP TABLE IF EXISTS `messages`;
-
+--No implemntado
 CREATE TABLE IF NOT EXISTS `messages` (
   `id_mensajes` int(11) NOT NULL AUTO_INCREMENT,
   `body` text NOT NULL,
@@ -81,67 +86,6 @@ CREATE TABLE IF NOT EXISTS `messages` (
   PRIMARY KEY (`id_mensajes`)
 ) ENGINE=MyISAM AUTO_INCREMENT=182 DEFAULT CHARSET=latin1;
 
---INSERT INTO `messages` (`id`, `body`, `msg_by`, `msg_to`, `msg_time`) VALUES
---(178, 'hlw', 9, 12, '2018-07-23 14:13:38'),
---(177, 'hi', 12, 9, '2018-07-23 14:13:26');
-
-ALTER TABLE `mycart`
-  ADD PRIMARY KEY (`id_cart`),
-  ADD KEY `id_producto` (`id_producto`),
-  ADD KEY `id_usuario_comprador` (`id_usuario_comprador`);
-
--- Indices de la tabla `producto`
-ALTER TABLE `producto`
-  ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `id_usuario` (`id_usuario`);
-
--- Indices de la tabla `usuario`
-ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`id_usuario`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
-
--- AUTO_INCREMENT de la tabla `mycart`
---
-ALTER TABLE `mycart`
-  MODIFY `id_cart` int(200) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `producto`
---
-ALTER TABLE `producto`
-  MODIFY `id_producto` int(200) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `usuario`
---
-ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(200) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `empresa`
---
-ALTER TABLE `empresa`
-  ADD CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`id_dueno`) REFERENCES `usuario` (`id_usuario`);
-
---
--- Filtros para la tabla `mycart`
---
-ALTER TABLE `mycart`
-  ADD CONSTRAINT `mycart_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
-  ADD CONSTRAINT `mycart_ibfk_2` FOREIGN KEY (`id_usuario_comprador`) REFERENCES `usuario` (`id_usuario`);
-
---
--- Filtros para la tabla `producto`
---
-ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

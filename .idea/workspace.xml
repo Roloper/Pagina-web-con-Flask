@@ -6,7 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="e78599bc-fb5f-4d5d-8f46-a7f4b30c0a0f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/template/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BD/bd_proyecto.sql" beforeDir="false" afterPath="$PROJECT_DIR$/BD/bd_proyecto.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/home.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/home.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/1011715.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/20220728_152355.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/20220909_140640.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/322320029_870633740801390_255450018233806993_n.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/DSC_0052.NEF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/IMG_20201127_212643.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/Kaifuku-Jutsushi-no-Yarinaoshi-1.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/WhatsApp_Image_2022-03-28_at_9.05.30_PM.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/escudo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/img/img006.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/Perfil/perfil.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/Perfil/perfil.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/auth/mision.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/auth/mision.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/template/carrito/mycart.html" beforeDir="false" afterPath="$PROJECT_DIR$/template/carrito/mycart.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,15 +53,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ToolWindowRun.ShowToolbar": "false",
+    "last_opened_file_path": "C:/xampp/htdocs/proyecto_DSW/Pagina-web-con-Flask",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\proyecto_DSW\Pagina-web-con-Flask\models" />

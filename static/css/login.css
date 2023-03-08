@@ -9,6 +9,10 @@ body {
   padding-top: 40px;
   padding-bottom: 40px;
   background-color: #f5f5f5;
+  align-items: center;
+  background-image: url("../img/fondo-login.jpg");
+  background-size: cover;
+  height: 100%;
 }
 
 .form-signin {
