@@ -20,15 +20,15 @@ SET time_zone = "-05:00";
 
 CREATE TABLE `usuario` (
   `id_usuario` int(200) NOT NULL AUTO_INCREMENT,
-  `a_name` varchar(255) NOT NULL,
-  `a_username` varchar(255) NOT NULL,
+  `a_name` varchar(255) NOT NULL, --nombre propeario
+  `a_username` varchar(255) NOT NULL, --nombre empresa
   `a_password` varchar(255) NOT NULL,
   `a_email` varchar(255) NOT NULL,
   `a_descripcion` varchar(255) NOT NULL,
   `a_celular` varchar(20) NOT NULL,
   `a_ubicacion` varchar(255) NOT NULL,
   `a_imagenperfil` varchar(5000),
-  `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `a_reg_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, --
   `online` varchar(1) NOT NULL DEFAULT '0',
    PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -53,6 +53,17 @@ CREATE TABLE publicaciones (
   PRIMARY KEY (id_publicacion),
   FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+
+
+
+
+
+
+
+
 
 --No implementada
 CREATE TABLE `mycart` (

@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, sen
 from config import config
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user #_-----
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import os
@@ -19,13 +19,14 @@ from models.entities.Producto import Producto
 from models.entities.Publicacion import Publicacion
 from models.entities.User import User
 
+#------------------------------
 app = Flask(__name__, template_folder='template')
 csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
 app.config['UPLOAD_FOLDER'] = 'static/img'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'NEF'}
-
+#----
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -38,6 +39,8 @@ def load_user(id_usuario):
 def download_file(name):
     return send_from_directory(app.config['UPLOAD_FOLDER'], name)
 
+#--------
+#--------------------------
 # URL PRINCIPAL
 @app.route('/')
 def index():
@@ -70,6 +73,7 @@ def login():
     else:
         return render_template('auth/login.html')
 
+#___________________________________________
 
 # URL DEL REGISTRO-
 @app.route('/register', methods=['GET', 'POST'])
@@ -102,7 +106,7 @@ def register():
 
     else:
         return render_template('auth/register.html')
-
+#--------------------
 
 # Redireccion para el cierre de sesion
 @app.route('/logout')
