@@ -1,43 +1,64 @@
-{% extends '/base.html' %}
-
-{% block title %}Login{% endblock %}
-
-{% block customCSS %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
-{% endblock %}
-
-{% block body %}
+{% extends '/base.html' %} {% block title %}Login{% endblock %} {% block
+customCSS %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}" />
+{% endblock %} {% block body %}
 <form class="form-signin" action="/login" method="POST">
     <img class="mb-4" src="{{ url_for('static', filename='img/plantita.jpeg') }}" alt="" width="100" height="60">
 
     <h1 class="h3 mb-3 fw-normal">Inicie Sesión</h1>
     <!-- Agregar el campo CSRF token -->
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+  <img
+    class="mb-4"
+    src="{{ url_for('static', filename='img/2917734.png') }}"
+    alt=""
+    width="100"
+    height="60"
+  />
 
-    <div class="form-floating">
-        <input type="text" class="form-control" autocomplete="off" id="username" name="a_username" placeholder="Username">
-        <label for="username">Username</label>
-    </div>
+  <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+  <!-- Agregar el campo CSRF token -->
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+  <div class="form-floating">
+    <input
+      type="text"
+      class="form-control"
+      autocomplete="off"
+      id="username"
+      name="a_username"
+      placeholder="Username"
+    />
+    <label for="username">Username</label>
+  </div>
 
-    <div class="form-floating mt-2">
-        <input type="password" class="form-control" name="a_password" placeholder="Password">
-        <label for="password">Password</label>
-    </div>
+  <div class="form-floating mt-2">
+    <input
+      type="password"
+      class="form-control"
+      name="a_password"
+      placeholder="Password"
+    />
+    <label for="password">Password</label>
+  </div>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-    <br />
-            {% for message in messages %}
-                <div class="alert alert-primary alert-dismissible" role="alert">
-                    <strong>{{ message }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-    {%endwith%}
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <br />
+  {% for message in messages %}
+  <div class="alert alert-primary alert-dismissible" role="alert">
+    <strong>{{ message }}</strong>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+  {% endfor %} {% endif %} {%endwith%}
 
-    <p class="text-center mt-4">¿Aún no tienes una cuenta? Regístrate <a href="{{ url_for('register') }}">aquí</a></p>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-
+  <p class="text-center mt-4">
+    ¿Aún no tienes una cuenta? Regístrate
+    <a href="{{ url_for('register') }}">aquí</a>
+  </p>
+  <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
 </form>
 {% endblock %}
